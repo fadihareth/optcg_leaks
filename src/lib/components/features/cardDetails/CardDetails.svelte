@@ -21,12 +21,14 @@
 		{#if card.effect !== ''}
 			<div class="flex flex-col items-start">
 				<p class="text-xl font-semibold">Effect</p>
-				<p class="text-start">{card.effect}</p>
+				<p class="text-start whitespace-pre-wrap">{card.effect}</p>
 			</div>
 		{/if}
 		{#if card.trigger !== ''}
-			<p class="text-xl font-semibold">Trigger</p>
-			<p class="text-start">{card.trigger}</p>
+			<div class="flex flex-col items-start">
+				<p class="text-xl font-semibold">Trigger</p>
+				<p class="text-start whitespace-pre-wrap">{card.trigger}</p>
+			</div>
 		{/if}
         <p>Translated By: {card.translation_credit}</p>
 	</div>
