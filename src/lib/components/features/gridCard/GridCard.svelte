@@ -4,7 +4,11 @@
 	import { CardDetails } from '$lib/components';
 	import { CacheImage } from '$lib/components';
 
-	let { id, card }: { id: string; card: Card | null } = $props();
+	let {
+		id,
+		card,
+		hideUnrevealedCards
+	}: { id: string; card: Card | null; hideUnrevealedCards: boolean } = $props();
 
 	let showOverlay = $state(false);
 
@@ -21,23 +25,21 @@
 	}
 </script>
 
-<div class="shadow-md">
-	{#if card}
-		<button
-			onclick={toggleShowOverlay}
-			class="h-full w-full transition hover:cursor-pointer hover:brightness-80"
-		>
-			<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded" />
-		</button>
-	{:else}
-		<p
-			class="flex flex-col justify-around rounded bg-white/30 text-center text-white/60"
-			style="aspect-ratio: 100 / 147"
-		>
-			{id}
-		</p>
-	{/if}
-</div>
+{#if card}
+	<button
+		onclick={toggleShowOverlay}
+		class="h-full w-full transition hover:cursor-pointer hover:brightness-80 shadow-lg"
+	>
+		<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded" />
+	</button>
+{:else if !hideUnrevealedCards}
+	<p
+		class="flex flex-col justify-around rounded bg-white/30 text-center text-white/60 shadow-lg"
+		style="aspect-ratio: 100 / 147"
+	>
+		{id}
+	</p>
+{/if}
 
 {#if card}
 	<Overlay bind:open={showOverlay} onClose={toggleShowOverlay}>

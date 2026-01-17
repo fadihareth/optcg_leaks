@@ -11,6 +11,8 @@
 	let sets: string[] = $state([]);
 	let selectedSet: string = $state('');
 
+	let hideUnrevealedCards: boolean = $state(false);
+
 	let loading = $state(true);
 	let error = $state<string | null>(null);
 
@@ -42,7 +44,11 @@
 			<div class="spinner h-5 w-5"></div>
 		</div>
 	{:else}
-		<GridHeader data={data[selectedSet]?.data} count={countRarities(data[selectedSet]?.cards)} />
+		<GridHeader
+			data={data[selectedSet]?.data}
+			count={countRarities(data[selectedSet]?.cards)}
+			bind:hideUnrevealedCards
+		/>
 		<div
 			class="grid gap-3 px-6 pb-6"
 			style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));"
@@ -51,6 +57,7 @@
 				<GridCard
 					id={getCardId(id + 1, selectedSet)}
 					card={data[selectedSet]?.cards[getCardId(id + 1, selectedSet)]}
+					{hideUnrevealedCards}
 				/>
 			{/each}
 		</div>
