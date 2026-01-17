@@ -18,7 +18,7 @@
 	<CacheImage
 		src={card.image}
 		alt={card.id}
-		tags="rounded-2xl object-contain max-md:mt-10"
+		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10"
 		style="aspect-ratio: 562 / 782"
 	/>
 	<div class="flex flex-col items-start gap-4 md:pt-4">
