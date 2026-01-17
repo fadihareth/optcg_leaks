@@ -5,7 +5,7 @@
 	import { CardSet } from '$lib/models/CardSet';
 	import { fetchSets, loadData } from '$lib/stores/data';
 	import { GridCard } from '$lib/components';
-	import { getCardId } from '$lib/util/getCardId';
+	import { countRarities, getCardId } from '$lib/util';
 
 	let data: Record<string, { data: CardSet; cards: Record<string, Card> }> = $state({});
 	let sets: string[] = $state([]);
@@ -42,7 +42,7 @@
 			<div class="spinner h-5 w-5"></div>
 		</div>
 	{:else}
-		<GridHeader data={data[selectedSet]?.data} />
+		<GridHeader data={data[selectedSet]?.data} count={countRarities(data[selectedSet]?.cards)} />
 		<div
 			class="grid gap-3 px-6 pb-6"
 			style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));"
