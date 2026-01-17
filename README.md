@@ -1,38 +1,19 @@
-# sv
+# OPTCG Leaks
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Web app for compiling leaked cards for upcoming **One Piece Trading Card Game** sets to preview in one place.
 
-## Creating a project
+Displays all currently revealed cards with English translations for card information as well as a count for cards remaining to be be revealed.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Assets
 
-```sh
-# create a new project in the current directory
-npx sv create
+All assets and data are served from:
 
-# create a new project in my-app
-npx sv create my-app
+```
+https://optcg-leaks.s3.us-east-2.amazonaws.com
 ```
 
-## Developing
+## Legal Disclaimer
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+One Piece, One Piece Trading Card Game and all related assets are © **Eichiro Oda, Toei Animation, Shueisha, and Bandai**.
 
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+This project is unofficial and all assets are used for **educational and informational purposes only**.
