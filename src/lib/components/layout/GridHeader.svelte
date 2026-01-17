@@ -11,7 +11,7 @@
 	<p class="text-3xl">{data.id} - {data.name}</p>
 	<div class="flex gap-x-4 flex-wrap">
         {#each ["leader", "common", "uncommon", "rare", "super_rare", "secret_rare"] as r}
-            <p>{format_rarity(r)}s: {count[r]} / {data.rarities[r]}</p>
+            <p class="text-white/70">{format_rarity(r)}s: {count[r]} / {data.rarities[r]}</p>
         {/each}
 	</div>
 </div>

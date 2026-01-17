@@ -23,13 +23,16 @@
 
 <div class="shadow-md">
 	{#if card}
-		<button onclick={toggleShowOverlay} class="transition hover:cursor-pointer hover:brightness-80">
-			<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded object-contain" />
+		<button
+			onclick={toggleShowOverlay}
+			class="h-full w-full transition hover:cursor-pointer hover:brightness-80"
+		>
+			<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded object-cover" />
 		</button>
 	{:else}
 		<p
 			class="flex flex-col justify-around rounded bg-white/30 text-center text-white/60"
-			style="aspect-ratio: 101 / 141"
+			style="aspect-ratio: 100 / 147"
 		>
 			{id}
 		</p>

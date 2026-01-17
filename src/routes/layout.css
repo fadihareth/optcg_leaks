@@ -2,7 +2,7 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-    --color-theme: #222222;
+    --color-theme: #1e1e23;
 }
 
 @layer components {
