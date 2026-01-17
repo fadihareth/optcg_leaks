@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+    --color-theme: #222222;
+}
+
+@layer components {
+    .tag {
+        @apply rounded-full bg-gray-100/10 p-2 text-sm text-white/80;
+    }
+}
