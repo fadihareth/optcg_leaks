@@ -1,16 +1,38 @@
 <script lang="ts">
 	import type { Card } from '$lib/models/Card';
-	let { card }: { card: Card } = $props();
+	import { getCachedImage } from '$lib/util';
+	import X from '@tabler/icons-svelte/icons/x';
+
+	let { card, toggleShowOverlay }: { card: Card; toggleShowOverlay: () => void } = $props();
+
+	let imageSrc = $state<string | null>(null);
+	$effect(() => {
+		getCachedImage(card.image).then((res) => {
+			imageSrc = res;
+		});
+	});
 </script>
 
 <div
-	class="flex h-3/4 gap-6 rounded-2xl bg-theme p-6 shadow-lg max-md:h-11/12 max-md:w-11/12 max-md:flex-col max-md:overflow-y-scroll lg:w-3/4"
+	class="relative flex h-3/4 gap-6 rounded-2xl bg-theme p-4 shadow-lg max-md:h-full max-md:w-full max-md:flex-col max-md:overflow-y-scroll lg:w-3/4"
 >
-	<img src={card.image} alt={card.id} class="h-full rounded-2xl object-contain" style="aspect-ratio: 562 / 782" />
-	<div class="flex flex-col items-start gap-4">
-		<div class="flex flex-col items-start gap-1">
+	<button
+		onclick={toggleShowOverlay}
+		class="absolute top-4 right-4 h-8 w-8 rounded-full p-1 hover:cursor-pointer hover:bg-white/10"
+	>
+		<X />
+	</button>
+	<img
+		src={imageSrc}
+		alt={card.id}
+		class="h-full rounded-2xl object-contain max-md:pt-10"
+		loading="lazy"
+		style="aspect-ratio: 562 / 782"
+	/>
+	<div class="flex flex-col items-start gap-4 pt-4">
+		<div class="flex flex-col items-start">
 			<p class="text-4xl font-semibold break-all">{card.name}</p>
-			<p class="text-md">{card.type.join(' / ')}</p>
+			<p class="text-md pb-1 text-white/70">{card.type.join(' / ')}</p>
 			<div class="flex flex-wrap gap-2">
 				<p class="tag">{card.id}</p>
 				<p class="tag">{card.color.join(' / ')}</p>
@@ -30,6 +52,6 @@
 				<p class="text-start whitespace-pre-wrap">{card.trigger}</p>
 			</div>
 		{/if}
-        <p>Translated By: {card.translation_credit}</p>
+		<p>Translated By: {card.translation_credit}</p>
 	</div>
 </div>
