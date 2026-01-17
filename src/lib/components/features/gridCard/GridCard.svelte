@@ -2,20 +2,11 @@
 	import type { Card } from '$lib/models/Card';
 	import { Overlay } from '$lib/components';
 	import { CardDetails } from '$lib/components';
-	import { getCachedImage } from '$lib/util';
+	import { CacheImage } from '$lib/components';
 
 	let { id, card }: { id: string; card: Card | null } = $props();
 
 	let showOverlay = $state(false);
-	let thumbnailSrc = $state<string | null>(null);
-
-	$effect(() => {
-		if (card) {
-			getCachedImage(card.thumbnail).then((res) => {
-				thumbnailSrc = res;
-			});
-		}
-	});
 
 	function toggleShowOverlay() {
 		const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -33,7 +24,7 @@
 <div class="shadow-md">
 	{#if card}
 		<button onclick={toggleShowOverlay} class="transition hover:cursor-pointer hover:brightness-80">
-			<img src={thumbnailSrc} alt={card.id} class="h-full w-full rounded object-contain" />
+			<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded object-contain" />
 		</button>
 	{:else}
 		<p

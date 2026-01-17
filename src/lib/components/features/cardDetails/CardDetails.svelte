@@ -1,16 +1,9 @@
 <script lang="ts">
 	import type { Card } from '$lib/models/Card';
-	import { getCachedImage } from '$lib/util';
+	import { CacheImage } from '$lib/components/ui';
 	import X from '@tabler/icons-svelte/icons/x';
 
 	let { card, toggleShowOverlay }: { card: Card; toggleShowOverlay: () => void } = $props();
-
-	let imageSrc = $state<string | null>(null);
-	$effect(() => {
-		getCachedImage(card.image).then((res) => {
-			imageSrc = res;
-		});
-	});
 </script>
 
 <div
@@ -22,11 +15,10 @@
 	>
 		<X />
 	</button>
-	<img
-		src={imageSrc}
+	<CacheImage
+		src={card.image}
 		alt={card.id}
-		class="h-full rounded-2xl object-contain max-md:pt-10"
-		loading="lazy"
+		tags="h-full rounded-2xl object-contain max-md:pt-10"
 		style="aspect-ratio: 562 / 782"
 	/>
 	<div class="flex flex-col items-start gap-4 pt-4">
