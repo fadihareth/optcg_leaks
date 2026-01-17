@@ -16,4 +16,4 @@
 	});
 </script>
 
-<img src={imageSrc} {alt} class={tags + 'transition-opacity duration-200'} {onload} class:opacity-0={!loaded} {style} />
+<img src={imageSrc} {alt} class={tags + ' transition-opacity duration-200'} {onload} class:opacity-0={!loaded} {style} />

@@ -27,7 +27,7 @@
 			onclick={toggleShowOverlay}
 			class="h-full w-full transition hover:cursor-pointer hover:brightness-80"
 		>
-			<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded object-cover" />
+			<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded" />
 		</button>
 	{:else}
 		<p
