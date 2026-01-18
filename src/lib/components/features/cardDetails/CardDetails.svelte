@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class="relative flex h-3/4 gap-6 rounded-2xl bg-theme p-4 shadow-lg max-md:h-full max-md:w-full max-md:flex-col max-md:items-center max-md:overflow-y-scroll lg:w-3/4"
+	class="relative flex h-3/4 gap-6 md:rounded-2xl bg-theme p-4 shadow-lg max-md:h-full max-md:w-full max-md:flex-col max-md:items-center max-md:overflow-y-scroll lg:w-3/4"
 >
 	<button
 		onclick={toggleShowOverlay}

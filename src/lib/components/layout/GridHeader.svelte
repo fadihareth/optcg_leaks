@@ -18,25 +18,25 @@
 	} as const;
 </script>
 
-<div class="p-layout flex flex-col gap-1">
-	<div class="flex items-center gap-3">
+<div class="p-layout flex flex-col gap-2">
+	<div class="flex items-center gap-2">
 		<p class="tag px-4 py-1 text-lg text-white">{data.id}</p>
 		<p class="text-xl font-semibold">{data.name}</p>
 	</div>
-	<div class="my-1 w-full border border-white/10"></div>
+	<div class="w-full border border-white/10"></div>
 	<div class="flex flex-wrap gap-x-4 text-white/70">
 		<p>&#x1F1EF;&#x1F1F5; Japan: {data.japan_release}</p>
-		<p>/</p>
+		<p class="max-md:hidden">/</p>
 		<p>&#x1F30E; Global: {data.global_release}</p>
 	</div>
-	<div class="flex flex-wrap gap-x-4 text-white/70">
+	<div class="flex flex-wrap gap-x-2 gap-y-4 my-2">
 		{#each ['L', 'C', 'UC', 'R', 'SR', 'SEC'] as r}
 			<p class="whitespace-nowrap">
-				<span class="inline md:hidden">
-					{r}: {count[r]} / {data.rarities[r]}
+				<span class="inline md:hidden tag">
+					{r} - {count[r]} / {data.rarities[r]}
 				</span>
-				<span class="hidden md:inline">
-					{rarityMap[r]}: {count[r]} / {data.rarities[r]}
+				<span class="hidden md:inline tag">
+					{rarityMap[r]}s: {count[r]} / {data.rarities[r]}
 				</span>
 			</p>
 		{/each}
