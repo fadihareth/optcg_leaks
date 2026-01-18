@@ -57,10 +57,10 @@ export class Card {
     }
 
     get thumbnail(): string {
-        return `${baseURL}/${this.id.split("-")[0].toLowerCase()}/thumbnails/${this.id.toLowerCase()}.png`;
+        return `${baseURL}/${this.id.split("-")[0].toLowerCase()}/thumbnails/${this.id.toLowerCase()}.webp`;
     }
 
     get image(): string {
-        return `${baseURL}/${this.id.split("-")[0].toLowerCase()}/images/${this.id.toLowerCase()}.png`;
+        return `${baseURL}/${this.id.split("-")[0].toLowerCase()}/images/${this.id.toLowerCase()}.webp`;
     }
 }
