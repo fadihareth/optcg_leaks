@@ -17,10 +17,19 @@
 </script>
 
 <div class="flex flex-col p-6 gap-1">
-	<p class="text-3xl">{data.id} - {data.name}</p>
-	<div class="flex flex-wrap gap-x-4">
+	<div class="flex gap-3 items-center">
+		<p class="tag text-lg text-white px-4 py-1">{data.id}</p>
+		<p class="text-xl font-semibold">{data.name}</p>
+	</div>
+	<div class="border w-full mt-1 border-white/10"></div>
+	<div class="flex flex-wrap gap-x-4 text-white/70">
+		<p>&#x1F1EF;&#x1F1F5; Japan: {data.japan_release}</p>
+		<p>/</p>
+		<p>&#x1F30E; Global: {data.global_release}</p>
+	</div>
+	<div class="flex flex-wrap gap-x-4 text-white/70">
 		{#each ['leader', 'common', 'uncommon', 'rare', 'super_rare', 'secret_rare'] as r}
-			<p class="text-white/70">{format_rarity(r)}s: {count[r]} / {data.rarities[r]}</p>
+			<p>{format_rarity(r)}s: {count[r]} / {data.rarities[r]}</p>
 		{/each}
 	</div>
     <div class="flex flex-wrap gap-x-4">
