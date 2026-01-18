@@ -1,10 +1,6 @@
 export default async function fetchJson<T>(url: string): Promise<T> {
     const response = await fetch(url, {
-        headers: {
-            Accept: "application/json",
-            "Cache-Control": "max-age=60", // Cache for 1 minute (60 seconds)
-        },
-        cache: "default",
+        cache: "no-cache",
     });
 
     if (!response.ok) {
