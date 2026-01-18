@@ -38,7 +38,7 @@
 </script>
 
 <main>
-	<Header {sets} bind:selectedSet />
+	<Header {sets} bind:selectedSet {loading} />
 	{#if loading}
 		<div class="flex w-full justify-around p-10">
 			<div class="spinner h-5 w-5"></div>

@@ -1,12 +1,14 @@
 <script lang="ts">
-	let { sets, selectedSet = $bindable() }: { sets: string[]; selectedSet: string } = $props();
+	import Select from 'svelte-select';
+
+	let { sets, selectedSet = $bindable(), loading }: { sets: string[]; selectedSet: string; loading: boolean } = $props();
 </script>
 
-<header class="sticky top-0 z-50 flex items-center justify-between p-6 shadow-sm bg-theme/80 backdrop-blur">
+<header
+	class="sticky top-0 z-50 flex items-center justify-between bg-theme/80 p-6 shadow-sm backdrop-blur"
+>
 	<h1 class="text-xl">OPTCG Leaks</h1>
-	<select>
-		{#each sets as set}
-			<option value={set}>{set}</option>
-		{/each}
-	</select>
+	{#if !loading}
+		<Select items={sets} value={selectedSet} bind:justValue={selectedSet} clearable={false} class="bg-theme! w-20!" placeholder="" />
+	{/if}
 </header>
