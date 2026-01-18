@@ -5,7 +5,7 @@
 </script>
 
 <header
-	class="sticky top-0 z-50 flex items-center justify-between bg-theme/80 p-6 shadow-sm backdrop-blur"
+	class="sticky top-0 z-50 flex items-center justify-between bg-theme/80 p-layout shadow-sm backdrop-blur"
 >
 	<h1 class="text-xl">OPTCG Leaks</h1>
 	{#if !loading}

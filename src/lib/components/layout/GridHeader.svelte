@@ -16,7 +16,7 @@
 	}
 </script>
 
-<div class="flex flex-col p-6 gap-1">
+<div class="flex flex-col p-layout gap-1">
 	<div class="flex gap-3 items-center">
 		<p class="tag text-lg text-white px-4 py-1">{data.id}</p>
 		<p class="text-xl font-semibold">{data.name}</p>

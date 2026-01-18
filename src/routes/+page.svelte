@@ -50,7 +50,7 @@
 			bind:hideUnrevealedCards
 		/>
 		<div
-			class="grid gap-3 px-6 pb-6"
+			class="grid gap-3 p-layout pt-0"
 			style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));"
 		>
 			{#each { length: data[selectedSet]?.data.cardCount + 1 }, id}
