@@ -38,6 +38,7 @@
 		"vite": "^7.2.6"
 	},
 	"dependencies": {
-		"@tabler/icons-svelte": "^3.36.1"
+		"@tabler/icons-svelte": "^3.36.1",
+		"svelte-select": "^5.8.3"
 	}
 }
