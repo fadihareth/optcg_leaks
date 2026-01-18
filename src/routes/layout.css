@@ -3,6 +3,7 @@
 
 @theme {
     --color-theme: #1e1e23;
+    --color-theme-darker: #18181c;
 }
 
 @layer components {

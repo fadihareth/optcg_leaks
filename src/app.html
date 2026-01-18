@@ -1,11 +1,15 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%sveltekit.head%
-	</head>
-	<body data-sveltekit-preload-data="hover" class="bg-theme text-white">
-		<div style="display: contents">%sveltekit.body%</div>
-	</body>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	%sveltekit.head%
+</head>
+
+<body data-sveltekit-preload-data="hover"
+	class="min-h-screen bg-theme bg-linear-to-b from-theme from-50% to-theme-darker text-white">
+	<div style="display: contents">%sveltekit.body%</div>
+</body>
+
 </html>

@@ -12,6 +12,7 @@
 		name="description"
 		content="Preview upcoming revealed and leaked cards for the One Piece Trading Card Game"
 	/>
+	<meta name="theme-color" content="#1e1e23" />
 	<link rel="icon" href={favicon} />
 	<link rel="apple-touch-icon" href={appleTouchIcon} />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,5 +28,20 @@
 <style>
 	:global(*) {
 		font-family: 'Roboto', Arial, Helvetica, sans-serif;
+	}
+	:global(.spinner) {
+		border: 3px solid rgba(170, 170, 170, 0.2);
+		border-top-color: rgba(170, 170, 170, 0.6);
+		border-radius: 50%;
+		animation: spin 0.7s linear infinite;
+	}
+
+	@keyframes spin {
+		from {
+			transform: rotate(0deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
 	}
 </style>

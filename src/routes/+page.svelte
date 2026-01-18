@@ -63,21 +63,3 @@
 		</div>
 	{/if}
 </main>
-
-<style>
-	.spinner {
-		border: 3px solid rgba(0, 0, 0, 0.2);
-		border-top-color: rgba(0, 0, 0, 0.6);
-		border-radius: 50%;
-		animation: spin 0.7s linear infinite;
-	}
-
-	@keyframes spin {
-		from {
-			transform: rotate(0deg);
-		}
-		to {
-			transform: rotate(360deg);
-		}
-	}
-</style>
