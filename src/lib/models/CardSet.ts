@@ -25,6 +25,6 @@ export class CardSet {
     }
 
     get cardCount(): number {
-        return this.rarities["leader"] + this.rarities["common"] + this.rarities["uncommon"] + this.rarities["rare"] + this.rarities["super_rare"] + this.rarities["secret_rare"];
+        return this.rarities["L"] + this.rarities["C"] + this.rarities["UC"] + this.rarities["R"] + this.rarities["SR"] + this.rarities["SEC"];
     }
 }
