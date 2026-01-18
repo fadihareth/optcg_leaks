@@ -17,7 +17,7 @@
 		value={selectedSet}
 		bind:justValue={selectedSet}
 		clearable={false}
-		class={`w-20! bg-theme! ${loading && 'opacity-0'}`}
+		class={`hidden! w-20! bg-theme! ${loading && 'opacity-0'}`}
 		placeholder=""
 	/>
 </header>
