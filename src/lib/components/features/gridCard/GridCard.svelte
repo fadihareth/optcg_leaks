@@ -29,6 +29,7 @@
 	<button
 		onclick={toggleShowOverlay}
 		class="h-full w-full transition hover:cursor-pointer hover:brightness-80 shadow-lg"
+		style="aspect-ratio: 100 / 147"
 	>
 		<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded" />
 	</button>
