@@ -44,6 +44,6 @@
 				<p class="text-start whitespace-pre-wrap">{card.trigger}</p>
 			</div>
 		{/if}
-		<p>Translated By: {card.translation_credit}</p>
+		<p class="text-white/70">Translated By: {card.translation_credit}</p>
 	</div>
 </div>
