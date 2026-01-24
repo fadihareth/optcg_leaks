@@ -28,7 +28,11 @@
 			<div class="flex flex-wrap gap-2">
 				<p class="tag">{card.id}</p>
 				<p class="tag">{card.color.join(' / ')}</p>
-				<p class="tag">{card.attribute.join(' / ')}</p>
+				{#if card.attribute.length > 0}
+					<p class="tag">{card.attribute.join(' / ')}</p>
+				{:else}
+					<p class="tag">{card.category}</p>
+				{/if}
 				<p class="tag">{card.rarity}</p>
 			</div>
 		</div>
