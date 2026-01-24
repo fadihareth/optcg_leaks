@@ -12,4 +12,24 @@
     .p-layout {
         @apply xl:px-20 max-xl:px-6 py-4
     }
+
+    /* CSS for Card effects */
+    .effect {
+        @apply inline-block p-1 my-0.5 mr-0.5 leading-none font-medium rounded-lg border border-white  text-white
+    }
+    .blue-effect {
+        @apply bg-[#007cbe]
+    }
+    .orange-effect {
+        @apply bg-[#dc7426]
+    }
+    .red-effect {
+        @apply bg-[#dc3b51]
+    }
+    .yellow-effect {
+        @apply bg-[#f1e806] text-black
+    }
+    .black-effect {
+        @apply bg-black
+    }
 }

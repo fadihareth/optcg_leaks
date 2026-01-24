@@ -1,13 +1,14 @@
 <script lang="ts">
 	import type { Card } from '$lib/models/Card';
 	import { CacheImage } from '$lib/components/ui';
+	import { highlightEffects } from '$lib/util';
 	import X from '@tabler/icons-svelte/icons/x';
 
 	let { card, toggleShowOverlay }: { card: Card; toggleShowOverlay: () => void } = $props();
 </script>
 
 <div
-	class="relative flex h-3/4 gap-6 md:rounded-2xl bg-theme p-4 shadow-lg max-md:h-full max-md:w-full max-md:flex-col max-md:items-center max-md:overflow-y-scroll lg:w-3/4"
+	class="relative flex h-3/4 gap-6 bg-theme p-4 shadow-lg max-md:h-full max-md:w-full max-md:flex-col max-md:items-center max-md:overflow-y-scroll md:rounded-2xl lg:w-3/4"
 >
 	<button
 		onclick={toggleShowOverlay}
@@ -39,13 +40,13 @@
 		{#if card.effect !== ''}
 			<div class="flex flex-col items-start">
 				<p class="text-xl font-semibold">Effect</p>
-				<p class="text-start whitespace-pre-wrap">{card.effect}</p>
+				<p class="text-start whitespace-pre-wrap">{@html highlightEffects(card.effect)}</p>
 			</div>
 		{/if}
 		{#if card.trigger !== ''}
 			<div class="flex flex-col items-start">
 				<p class="text-xl font-semibold">Trigger</p>
-				<p class="text-start whitespace-pre-wrap">{card.trigger}</p>
+				<p class="text-start whitespace-pre-wrap">{@html highlightEffects(card.trigger)}</p>
 			</div>
 		{/if}
 		<p class="text-white/70">Translated By: {card.translation_credit}</p>
