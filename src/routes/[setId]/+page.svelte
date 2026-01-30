@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { page } from '$app/state';
+	import { page } from '$app/state';
 	import { GridHeader, Header } from '$lib/components';
 	import { Card } from '$lib/models/Card';
 	import { CardSet } from '$lib/models/CardSet';
@@ -50,7 +50,10 @@
 
 <svelte:head>
 	<title>{pageTitle}</title>
-	<meta name="description" content="Full {pageTitle} with revealed and leaked cards for the One Piece Card Game." />
+	<meta
+		name="description"
+		content="Full {pageTitle} with English translations of revealed and leaked cards for the One Piece Card Game."
+	/>
 </svelte:head>
 
 <main>
@@ -68,7 +71,7 @@
 			bind:hideUnrevealedCards={filters.hideUnrevealedCards}
 		/>
 		<div
-			class="grid gap-3 p-layout pt-0"
+			class="p-layout grid gap-3 pt-0"
 			style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));"
 		>
 			{#each { length: setData.cardCount + 1 }, id}
