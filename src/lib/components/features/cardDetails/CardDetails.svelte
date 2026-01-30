@@ -49,6 +49,6 @@
 				<p class="text-start whitespace-pre-wrap">{@html highlightEffects(card.trigger)}</p>
 			</div>
 		{/if}
-		<p class="text-white/70">Translated By: {card.translation_credit}</p>
+		<p class="text-white/70">Translated by: {card.translation_credit}</p>
 	</div>
 </div>
