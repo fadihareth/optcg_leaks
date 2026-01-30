@@ -29,14 +29,14 @@
 	<button
 		onclick={toggleShowOverlay}
 		class="h-full w-full transition hover:cursor-pointer hover:brightness-80 shadow-lg"
-		style="aspect-ratio: 562 / 782"
+		style="aspect-ratio: 416 / 580"
 	>
 		<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded" />
 	</button>
 {:else if !hideUnrevealedCards}
 	<p
 		class="flex flex-col justify-around rounded bg-white/30 text-center text-white/60 shadow-lg"
-		style="aspect-ratio: 562 / 782"
+		style="aspect-ratio: 416 / 580"
 	>
 		{id}
 	</p>

@@ -20,7 +20,7 @@
 		src={card.image}
 		alt={card.id}
 		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10"
-		style="aspect-ratio: 562 / 782"
+		style="aspect-ratio: 416 / 580"
 	/>
 	<div class="flex flex-col items-start gap-4 md:pt-4">
 		<div class="flex flex-col items-start">
