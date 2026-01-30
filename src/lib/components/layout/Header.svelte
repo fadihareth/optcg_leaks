@@ -1,16 +1,10 @@
 <script lang="ts">
 	import Select from 'svelte-select';
 
-	let {
-		sets,
-		selectedSet = $bindable(),
-		loading
-	}: { sets: string[]; selectedSet: string; loading: boolean } = $props();
+	let { loading }: { loading: boolean } = $props();
 </script>
 
-<header
-	class="p-layout sticky top-0 z-50 flex items-center justify-between bg-theme shadow-xs"
->
+<header class="p-layout sticky top-0 z-50 flex items-center justify-between bg-theme shadow-xs">
 	<h1 class="text-xl font-semibold">OPTCG Leaks</h1>
 	<!-- <Select
 		items={sets}
