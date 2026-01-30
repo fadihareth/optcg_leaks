@@ -38,7 +38,7 @@
 		class="flex flex-col justify-around rounded bg-white/30 text-center text-white/60 shadow-lg"
 		style="aspect-ratio: 416 / 580"
 	>
-		{id}
+		{id.toUpperCase()}
 	</p>
 {/if}
 
