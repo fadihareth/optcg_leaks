@@ -20,7 +20,7 @@
 
 <div class="p-layout flex flex-col gap-2">
 	<div class="flex items-center gap-2">
-		<p class="tag px-4 py-1 text-lg text-white">{data.id}</p>
+		<h1 class="tag px-4 py-1 text-lg text-white">{data.id}</h1>
 		<p class="text-xl font-semibold">{data.name}</p>
 	</div>
 	<div class="w-full border border-white/10"></div>
