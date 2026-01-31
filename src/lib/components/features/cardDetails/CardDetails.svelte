@@ -24,7 +24,7 @@
 	/>
 	<div class="flex flex-col items-start gap-4 md:pt-4">
 		<div class="flex flex-col items-start">
-			<p class="text-4xl font-semibold break-all">{card.name}</p>
+			<p class="text-4xl font-semibold text-left">{card.name}</p>
 			<p class="text-md pb-1 text-white/70">{card.type.join(' / ')}</p>
 			<div class="flex flex-wrap gap-2">
 				<p class="tag">{card.id}</p>
