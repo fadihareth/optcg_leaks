@@ -8,6 +8,7 @@ const EFFECTS: Record<string, RegExp[]> = {
         /\[On K.O.\]/gi,
         /\[Opponent’s Turn\]/gi,
         /\[On Your Opponent’s Attack\]/gi,
+        /\[Main\]/gi,
     ],
     "red-effect": [
         /\[Once Per Turn\]/gi,
