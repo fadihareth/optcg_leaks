@@ -49,7 +49,7 @@
 </script>
 
 <svelte:head>
-	<title>{pageTitle}</title>
+	<title>{pageTitle} - OPTCG Leaks</title>
 	<meta
 		name="description"
 		content="Full {pageTitle} with English translations of revealed and leaked cards for the One Piece Card Game."

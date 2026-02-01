@@ -7,10 +7,10 @@
 </script>
 
 <svelte:head>
-	<title>OPTCG Leaks</title>
+	<title>OPTCG Leaks - Revealed cards for upcoming One Piece Trading Card Game sets with English translations</title>
 	<meta
 		name="description"
-		content="Preview upcoming revealed and leaked cards for the One Piece Trading Card Game"
+		content="Preview full card lists with English translations of revealed and leaked cards for the One Piece Trading Card Game"
 	/>
 	<meta name="theme-color" content="#1e1e23" />
 	<link rel="icon" href={favicon} />
