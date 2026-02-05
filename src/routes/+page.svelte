@@ -1,7 +1,6 @@
 <script lang="ts">
-	// Root route redirects to first set via +page.server.ts
+	import { SetMainPage } from '$lib/components';
+	import { SET_IDS } from '$lib/constants';
 </script>
 
-<main class="flex w-full justify-around p-10">
-	<div class="spinner h-5 w-5"></div>
-</main>
+<SetMainPage setId={SET_IDS[0]} />
