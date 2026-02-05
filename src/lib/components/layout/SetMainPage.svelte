@@ -74,7 +74,7 @@
 			class="p-layout grid gap-3 pt-0"
 			style="grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));"
 		>
-			{#each { length: setData.cardCount + 1 }, id}
+			{#each { length: setData.cardCount }, id}
 				<GridCard
 					id={getCardId(id + 1, setIdLower)}
 					card={cards[getCardId(id + 1, setIdLower)]}
