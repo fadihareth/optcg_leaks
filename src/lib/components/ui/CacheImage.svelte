@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { getCachedImage } from '$lib/util';
 
-	let { src, alt, tags, style = "" }: { src: string; alt: string; tags: string; style?: string } = $props();
+	let {
+		src,
+		alt,
+		tags,
+		style = ''
+	}: { src: string; alt: string; tags: string; style?: string } = $props();
+	
 	let imageSrc = $state<string | null>(null);
 	let loaded = $state(false);
 
@@ -16,4 +22,11 @@
 	});
 </script>
 
-<img src={imageSrc} {alt} class={tags + ' transition-opacity duration-200'} {onload} class:opacity-0={!loaded} {style} />
+<img
+	src={imageSrc}
+	{alt}
+	class={tags + ' transition-opacity duration-200'}
+	{onload}
+	class:opacity-0={!loaded}
+	{style}
+/>

@@ -15,8 +15,9 @@
 	let loading = $state(true);
 	let error = $state<string | null>(null);
 
-	let filters = $state({
-		hideUnrevealedCards: false
+	let toggles = $state({
+		hideUnrevealedCards: false,
+		showAltArts: false
 	});
 
 	$effect(() => {
@@ -68,7 +69,8 @@
 		<GridHeader
 			data={setData}
 			count={countRarities(cards)}
-			bind:hideUnrevealedCards={filters.hideUnrevealedCards}
+			bind:hideUnrevealedCards={toggles.hideUnrevealedCards}
+			bind:showAltArts={toggles.showAltArts}
 		/>
 		<div
 			class="p-layout grid gap-3 pt-0"
@@ -78,7 +80,8 @@
 				<GridCard
 					id={getCardId(id + 1, setIdLower)}
 					card={cards[getCardId(id + 1, setIdLower)]}
-					hideUnrevealedCards={filters.hideUnrevealedCards}
+					hideUnrevealedCards={toggles.hideUnrevealedCards}
+					showAltArts={toggles.showAltArts}
 				/>
 			{/each}
 		</div>

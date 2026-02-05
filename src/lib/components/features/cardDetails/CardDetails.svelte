@@ -3,12 +3,19 @@
 	import { CacheImage } from '$lib/components/ui';
 	import { highlightEffects } from '$lib/util';
 	import X from '@tabler/icons-svelte/icons/x';
+	import Toggle from 'svelte-toggle';
 
-	let { card, toggleShowOverlay }: { card: Card; toggleShowOverlay: () => void } = $props();
+	let {
+		card,
+		toggleShowOverlay,
+		loadAltArt
+	}: { card: Card; toggleShowOverlay: () => void; loadAltArt: boolean } = $props();
+
+	let showAltArt = $derived(loadAltArt);
 </script>
 
 <div
-	class="relative flex h-3/4 gap-6 bg-theme p-4 shadow-lg max-md:h-full max-md:w-full max-md:flex-col max-md:items-center max-md:overflow-y-scroll md:rounded-2xl lg:w-3/4"
+	class="relative flex h-3/4 gap-6 bg-theme p-4 shadow-lg max-md:h-full max-md:w-full max-md:flex-col max-md:items-center max-md:overflow-y-scroll md:rounded-2xl xl:w-3/4"
 >
 	<button
 		onclick={toggleShowOverlay}
@@ -17,15 +24,15 @@
 		<X />
 	</button>
 	<CacheImage
-		src={card.image}
+		src={card.getImage(showAltArt)}
 		alt={card.id}
 		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10"
 		style="aspect-ratio: 416 / 580"
 	/>
 	<div class="flex flex-col items-start gap-4 md:pt-4">
 		<div class="flex flex-col items-start">
-			<p class="text-4xl font-semibold text-left">{card.name}</p>
-			<p class="text-md pb-1 text-white/70">{card.type.join(' / ')}</p>
+			<p class="text-left text-4xl font-semibold md:pr-12">{card.name}</p>
+			<p class="text-md pb-1 text-left text-white/70">{card.type.join(' / ')}</p>
 			<div class="flex flex-wrap gap-2">
 				<p class="tag">{card.id}</p>
 				<p class="tag">{card.color.join(' / ')}</p>
@@ -50,5 +57,11 @@
 			</div>
 		{/if}
 		<p class="text-white/70">Translated by: {card.translation_credit}</p>
+		{#if card.hasAltArt}
+			<div class="flex flex-wrap gap-x-4">
+				<Toggle bind:toggled={showAltArt} hideLabel />
+				<p class="text-white/70">Show Alternate Art</p>
+			</div>
+		{/if}
 	</div>
 </div>

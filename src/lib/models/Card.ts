@@ -56,11 +56,17 @@ export class Card {
         this.translation_credit = data.translation_credit;
     }
 
-    get thumbnail(): string {
-        return `${baseURL}/${this.id.split("-")[0].toLowerCase()}/thumbnails/${this.id.toLowerCase()}.webp`;
+    get hasAltArt(): boolean {
+        return this.parallel_status !== "Base";
     }
 
-    get image(): string {
-        return `${baseURL}/${this.id.split("-")[0].toLowerCase()}/images/${this.id.toLowerCase()}.webp`;
+    getThumbnail(showAltArt: boolean): string {
+        let url = `${baseURL}/${this.id.split("-")[0].toLowerCase()}/thumbnails/${this.id.toLowerCase()}`;
+        return url + (showAltArt && this.hasAltArt ? "a.webp" : ".webp")
+    }
+
+    getImage(showAltArt: boolean): string {
+        let url = `${baseURL}/${this.id.split("-")[0].toLowerCase()}/images/${this.id.toLowerCase()}`;
+        return url + (showAltArt && this.hasAltArt ? "a.webp" : ".webp")
     }
 }

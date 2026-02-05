@@ -7,8 +7,10 @@
 	let {
 		id,
 		card,
-		hideUnrevealedCards
-	}: { id: string; card: Card | null; hideUnrevealedCards: boolean } = $props();
+		hideUnrevealedCards,
+		showAltArts
+	}: { id: string; card: Card | null; hideUnrevealedCards: boolean; showAltArts: boolean } =
+		$props();
 
 	let showOverlay = $state(false);
 
@@ -28,10 +30,10 @@
 {#if card}
 	<button
 		onclick={toggleShowOverlay}
-		class="h-full w-full transition hover:cursor-pointer hover:brightness-80 shadow-lg"
+		class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80 {showAltArts && card.hasAltArt ? 'holo' : ''}"
 		style="aspect-ratio: 416 / 580"
 	>
-		<CacheImage src={card.thumbnail} alt={card.id} tags="h-full w-full rounded" />
+		<CacheImage src={card.getThumbnail(showAltArts)} alt={card.id} tags="h-full w-full rounded" />
 	</button>
 {:else if !hideUnrevealedCards}
 	<p
@@ -44,6 +46,6 @@
 
 {#if card}
 	<Overlay bind:open={showOverlay} onClose={toggleShowOverlay}>
-		<CardDetails {card} {toggleShowOverlay} />
+		<CardDetails {card} {toggleShowOverlay} loadAltArt={showAltArts} />
 	</Overlay>
 {/if}

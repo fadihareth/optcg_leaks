@@ -5,8 +5,14 @@
 	let {
 		data,
 		count,
-		hideUnrevealedCards = $bindable()
-	}: { data: CardSet; count: Record<string, number>; hideUnrevealedCards: boolean } = $props();
+		hideUnrevealedCards = $bindable(),
+		showAltArts = $bindable()
+	}: {
+		data: CardSet;
+		count: Record<string, number>;
+		hideUnrevealedCards: boolean;
+		showAltArts: boolean;
+	} = $props();
 
 	const rarityMap: Record<string, string> = {
 		L: 'Leader',
@@ -29,20 +35,26 @@
 		<p class="max-md:hidden">/</p>
 		<p>&#x1F30E; Global: {data.global_release}</p>
 	</div>
-	<div class="flex flex-wrap gap-x-2 gap-y-4 my-2">
+	<div class="my-2 flex flex-wrap gap-x-2 gap-y-4">
 		{#each ['L', 'C', 'UC', 'R', 'SR', 'SEC'] as r}
 			<p class="whitespace-nowrap">
-				<span class="inline md:hidden tag">
+				<span class="tag inline md:hidden">
 					{r} - {count[r]} / {data.rarities[r]}
 				</span>
-				<span class="hidden md:inline tag">
+				<span class="tag hidden md:inline">
 					{rarityMap[r]}s: {count[r]} / {data.rarities[r]}
 				</span>
 			</p>
 		{/each}
 	</div>
-	<div class="flex flex-wrap gap-x-4">
-		<Toggle bind:toggled={hideUnrevealedCards} hideLabel />
-		<p class="text-white/70">Show Only Revealed Cards</p>
+	<div class="flex flex-wrap gap-x-4 gap-y-1">
+		<div class="flex flex-wrap gap-x-4">
+			<Toggle bind:toggled={hideUnrevealedCards} hideLabel />
+			<p class="text-white/70">Show Only Revealed Cards</p>
+		</div>
+		<div class="flex flex-wrap gap-x-4">
+			<Toggle bind:toggled={showAltArts} hideLabel />
+			<p class="text-white/70">Show Alternate Arts</p>
+		</div>
 	</div>
 </div>
