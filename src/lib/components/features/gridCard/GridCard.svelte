@@ -13,8 +13,9 @@
 		$props();
 
 	let showOverlay = $state(false);
+	let loadAltArt = $state(false);
 
-	function toggleShowOverlay() {
+	function toggleShowOverlay(isAltArt: boolean = false) {
 		const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 		if (!showOverlay) {
 			document.body.style.overflow = 'hidden';
@@ -23,18 +24,28 @@
 			document.body.style.overflow = 'unset';
 			document.body.style.paddingRight = '0';
 		}
+		loadAltArt = isAltArt;
 		showOverlay = !showOverlay;
 	}
 </script>
 
 {#if card}
 	<button
-		onclick={toggleShowOverlay}
-		class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80 {showAltArts && card.hasAltArt ? 'holo' : ''}"
+		onclick={() => toggleShowOverlay(false)}
+		class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
 		style="aspect-ratio: 416 / 580"
 	>
-		<CacheImage src={card.getThumbnail(showAltArts)} alt={card.id} tags="h-full w-full rounded" />
+		<CacheImage src={card.getThumbnail(false)} alt={card.id} tags="h-full w-full rounded" />
 	</button>
+	{#if card.hasAltArt}
+		<button
+			onclick={() => toggleShowOverlay(true)}
+			class="holo h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80 {showAltArts ? 'block' : 'hidden'}"
+			style="aspect-ratio: 416 / 580"
+		>
+			<CacheImage src={card.getThumbnail(true)} alt={card.id} tags="h-full w-full rounded" />
+		</button>
+	{/if}
 {:else if !hideUnrevealedCards}
 	<p
 		class="flex flex-col justify-around rounded bg-white/30 text-center text-white/60 shadow-lg"
@@ -46,6 +57,6 @@
 
 {#if card}
 	<Overlay bind:open={showOverlay} onClose={toggleShowOverlay}>
-		<CardDetails {card} {toggleShowOverlay} loadAltArt={showAltArts} />
+		<CardDetails {card} {toggleShowOverlay} {loadAltArt} />
 	</Overlay>
 {/if}
