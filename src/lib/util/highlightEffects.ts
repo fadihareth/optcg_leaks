@@ -16,7 +16,7 @@ const EFFECTS: Record<string, RegExp[]> = {
     ],
     "orange-effect": [
         /<(?:Rush|Blocker|Banish|Double Attack|Unblockable)>/gi,
-        /\[Blocker\]/gi,
+        /\[(?:Rush|Blocker|Banish|Double Attack|Unblockable)\]/gi,
     ],
     "black-effect": [
         /\[(DON[^\]]*)\]/gi,
