@@ -36,7 +36,7 @@
 		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10"
 		style="aspect-ratio: 416 / 580"
 	/>
-	<div class="flex flex-col items-start gap-4 md:pt-4">
+	<div class="flex flex-col items-start gap-4 md:pt-4 max-md:w-full">
 		<div class="flex flex-col items-start">
 			<p class="text-left text-4xl font-semibold md:pr-12">{card.name}</p>
 			<p class="text-md pb-1 text-left text-white/70">{card.type.join(' / ')}</p>
