@@ -41,7 +41,7 @@
 			{#each filteredItems as item}
 				<button
 					onclick={() => handleSelectChange(item)}
-					class="flex w-full items-center p-2 hover:bg-white/10"
+					class="flex w-full items-center p-3 hover:bg-white/10"
 				>
 					{item.label}
 				</button>
