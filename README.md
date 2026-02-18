@@ -11,7 +11,7 @@ Deployed at: https://optcgleaks.com
 All assets and data are served from:
 
 ```
-https://optcg-leaks.s3.us-east-2.amazonaws.com
+https://images.optcgleaks.com
 ```
 
 ## Legal Disclaimer
