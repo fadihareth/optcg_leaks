@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Card } from '$lib/models/Card';
+	import type { Card, ParallelStatus } from '$lib/models/Card';
 	import { Overlay } from '$lib/components';
 	import { CardDetails } from '$lib/components';
 	import { CacheImage } from '$lib/components';
@@ -13,9 +13,9 @@
 		$props();
 
 	let showOverlay = $state(false);
-	let loadAltArt = $state(false);
+	let loadParallelStatus: ParallelStatus = $state('base');
 
-	function toggleShowOverlay(isAltArt: boolean = false) {
+	function toggleShowOverlay(parallelStatus: ParallelStatus = 'base') {
 		const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 		if (!showOverlay) {
 			document.body.style.overflow = 'hidden';
@@ -24,26 +24,35 @@
 			document.body.style.overflow = 'unset';
 			document.body.style.paddingRight = '0';
 		}
-		loadAltArt = isAltArt;
+		loadParallelStatus = parallelStatus;
 		showOverlay = !showOverlay;
 	}
 </script>
 
 {#if card}
 	<button
-		onclick={() => toggleShowOverlay(false)}
+		onclick={() => toggleShowOverlay('base')}
 		class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
 		style="aspect-ratio: 416 / 580"
 	>
-		<CacheImage src={card.getThumbnail(false)} alt={card.id} tags="h-full w-full rounded" />
+		<CacheImage src={card.getImage('thumbnails', 'base')} alt={card.id} tags="h-full w-full rounded" />
 	</button>
 	{#if card.hasAltArt}
 		<button
-			onclick={() => toggleShowOverlay(true)}
+			onclick={() => toggleShowOverlay('parallel')}
 			class="holo h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80 {showAltArts ? 'block' : 'hidden'}"
 			style="aspect-ratio: 416 / 580"
 		>
-			<CacheImage src={card.getThumbnail(true)} alt={card.id} tags="h-full w-full rounded" />
+			<CacheImage src={card.getImage('thumbnails', 'parallel')} alt={card.id} tags="h-full w-full rounded" />
+		</button>
+	{/if}
+	{#if card.has_manga}
+		<button
+			onclick={() => toggleShowOverlay('manga')}
+			class="holo h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80 {showAltArts ? 'block' : 'hidden'}"
+			style="aspect-ratio: 416 / 580"
+		>
+			<CacheImage src={card.getImage('thumbnails', 'manga')} alt={card.id} tags="h-full w-full rounded" />
 		</button>
 	{/if}
 {:else if !hideUnrevealedCards}
@@ -57,6 +66,6 @@
 
 {#if card}
 	<Overlay bind:open={showOverlay} onClose={toggleShowOverlay}>
-		<CardDetails {card} {toggleShowOverlay} {loadAltArt} />
+		<CardDetails {card} {toggleShowOverlay} {loadParallelStatus} />
 	</Overlay>
 {/if}

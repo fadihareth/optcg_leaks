@@ -1,5 +1,7 @@
 import { baseURL } from "$lib/constants";
 
+export type ParallelStatus = 'base' | 'parallel' | 'manga';
+
 export type CardJSON = {
     id: string;
     name: string;
@@ -15,6 +17,7 @@ export type CardJSON = {
     counter: string;
     life: number;
     parallel_status: string;
+    has_manga?: boolean;
     translation_credit: string;
 }
 
@@ -36,6 +39,7 @@ export class Card {
     life: number;
 
     parallel_status: string;
+    has_manga: boolean;
     translation_credit: string;
 
     constructor(data: CardJSON) {
@@ -53,6 +57,7 @@ export class Card {
         this.counter = data.counter;
         this.life = data.life;
         this.parallel_status = data.parallel_status;
+        this.has_manga = data.has_manga ?? false;
         this.translation_credit = data.translation_credit;
     }
 
@@ -60,13 +65,14 @@ export class Card {
         return this.parallel_status !== "Base";
     }
 
-    getThumbnail(showAltArt: boolean): string {
-        let url = `${baseURL}/${this.id.split("-")[0].toLowerCase()}/thumbnails/${this.id.toLowerCase()}`;
-        return url + (showAltArt && this.hasAltArt ? "a.webp" : ".webp")
-    }
-
-    getImage(showAltArt: boolean): string {
-        let url = `${baseURL}/${this.id.split("-")[0].toLowerCase()}/images/${this.id.toLowerCase()}`;
-        return url + (showAltArt && this.hasAltArt ? "a.webp" : ".webp")
+    getImage(type: 'thumbnails' | 'images', parallel_status: ParallelStatus): string {
+        const setPrefix = this.id.split("-")[0].toLowerCase();
+        const cardId = this.id.toLowerCase();
+        const extension = {
+            base: '',
+            parallel: 'a',
+            manga: 'sp'
+        }[parallel_status];
+        return `${baseURL}/${setPrefix}/${type}/${cardId}${extension}.webp`;
     }
 }

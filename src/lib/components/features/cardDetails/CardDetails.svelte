@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Card } from '$lib/models/Card';
+	import type { Card, ParallelStatus } from '$lib/models/Card';
 	import { CacheImage } from '$lib/components/ui';
 	import { highlightEffects } from '$lib/util';
 	import X from '@tabler/icons-svelte/icons/x';
@@ -8,10 +8,17 @@
 	let {
 		card,
 		toggleShowOverlay,
-		loadAltArt
-	}: { card: Card; toggleShowOverlay: () => void; loadAltArt: boolean } = $props();
+		loadParallelStatus
+	}: { card: Card; toggleShowOverlay: () => void; loadParallelStatus: ParallelStatus } = $props();
 
-	let showAltArt = $derived(loadAltArt);
+	let parallelStatus: ParallelStatus = $derived(loadParallelStatus);
+
+	function toggleShowAltArt() {
+		parallelStatus = parallelStatus === "parallel" ? "base" : "parallel";
+	}
+	function toggleShowMangaArt() {
+		parallelStatus = parallelStatus === "manga" ? "base" : "manga";
+	}
 </script>
 
 <div
@@ -24,7 +31,7 @@
 		<X />
 	</button>
 	<CacheImage
-		src={card.getImage(showAltArt)}
+		src={card.getImage('images', parallelStatus)}
 		alt={card.id}
 		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10"
 		style="aspect-ratio: 416 / 580"
@@ -59,8 +66,14 @@
 		<p class="text-white/70">Translated by: {card.translation_credit}</p>
 		{#if card.hasAltArt}
 			<div class="flex flex-wrap gap-x-4">
-				<Toggle bind:toggled={showAltArt} hideLabel />
+				<Toggle toggled={parallelStatus === "parallel"} onclick={toggleShowAltArt} hideLabel />
 				<p class="text-white/70">Show Alternate Art</p>
+			</div>
+		{/if}
+		{#if card.has_manga}
+			<div class="flex flex-wrap gap-x-4">
+				<Toggle toggled={parallelStatus === "manga"} onclick={toggleShowMangaArt} hideLabel />
+				<p class="text-white/70">Show Manga Art</p>
 			</div>
 		{/if}
 	</div>
