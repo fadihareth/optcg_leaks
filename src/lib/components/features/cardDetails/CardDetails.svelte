@@ -63,7 +63,9 @@
 				<p class="text-start whitespace-pre-wrap">{@html highlightEffects(card.trigger)}</p>
 			</div>
 		{/if}
-		<p class="text-white/70">Translated by: {card.translation_credit}</p>
+		{#if card.translation_credit !== ""}
+			<p class="text-white/70">Translated by: {card.translation_credit}</p>
+		{/if}
 		{#if card.hasAltArt}
 			<div class="flex flex-wrap gap-x-4">
 				<Toggle toggled={parallelStatus === "parallel"} onclick={toggleShowAltArt} hideLabel />
