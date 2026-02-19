@@ -61,6 +61,32 @@
 			document.body.style.paddingRight = '0';
 		}
 	}
+	function changeCard(direction: 1 | -1) {
+		if (!selectedCard || !setData) return;
+
+		const currentId = selectedCard.id;
+		const [prefix, cardNumber] = currentId.split('-');
+		const maxCount = setData.cardCount;
+
+		let currentNumber = parseInt(cardNumber);
+
+		// Try at most cardCount times to avoid infinite loops
+		for (let i = 0; i < maxCount; i++) {
+			if (direction === 1) {
+				currentNumber = (currentNumber % maxCount) + 1;
+			} else {
+				currentNumber = currentNumber === 1 ? maxCount : currentNumber - 1;
+			}
+
+			const nextId = getCardId(currentNumber, prefix);
+			const nextCard = cards[nextId.toLowerCase()];
+
+			if (nextCard) {
+				selectedCard = nextCard;
+				return;
+			}
+		}
+	}
 
 	const pageTitle = $derived(`${setId.toUpperCase()} Cardlist`);
 </script>
@@ -119,5 +145,10 @@
 </main>
 
 <Overlay open={selectedCard !== null} onClose={selectCard}>
-	<CardDetails card={selectedCard!} set={setIdLower} toggleShowOverlay={selectCard} />
+	<CardDetails
+		card={selectedCard!}
+		set={setIdLower}
+		toggleShowOverlay={selectCard}
+		{changeCard}
+	/>
 </Overlay>

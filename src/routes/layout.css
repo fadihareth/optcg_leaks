@@ -12,6 +12,9 @@
     .p-layout {
         @apply xl:px-20 max-xl:px-6 py-4
     }
+    .arrow-button {
+        @apply absolute xl:top-1/2 md:top-full md:mt-4 top-100 h-12 w-12 z-10 rounded-full p-2 bg-theme hover:bg-theme/80 hover:cursor-pointer
+    }
 
     /* CSS for Card effects */
     .effect {

@@ -16,6 +16,7 @@
 	}
 
 	$effect(() => {
+		loaded = false;
 		getCachedImage(src).then((res) => {
 			imageSrc = res;
 		});
