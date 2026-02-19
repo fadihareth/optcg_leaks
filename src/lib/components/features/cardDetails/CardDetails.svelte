@@ -30,6 +30,9 @@
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
+		if (!card) return;
+
+		event.preventDefault();
 		if (event.key === 'ArrowLeft') {
 			prev();
 		} else if (event.key === 'ArrowRight') {
@@ -45,15 +48,15 @@
 >
 	<button
 		onclick={() => toggleShowOverlay()}
-		class="absolute top-4 right-4 h-8 w-8 z-20 rounded-full p-1 hover:cursor-pointer hover:bg-white/10"
+		class="absolute top-4 right-4 z-20 h-8 w-8 rounded-full p-1 hover:cursor-pointer hover:bg-white/10"
 	>
 		<IconX />
 	</button>
 	<div class="absolute w-full md:h-full" style="aspect-ratio: 416 / 580">
-		<button onclick={next} class="arrow-button max-md:right-6 right-10 xl:-right-10">
+		<button onclick={next} class="arrow-button right-10 max-md:right-6 xl:-right-10">
 			<IconChevronRight class="h-full w-full" />
 		</button>
-		<button onclick={prev} class="arrow-button max-md:left-6 left-2 xl:-left-18">
+		<button onclick={prev} class="arrow-button left-2 max-md:left-6 xl:-left-18">
 			<IconChevronLeft class="h-full w-full" />
 		</button>
 	</div>
