@@ -34,6 +34,7 @@
 		items={options}
 		value={selectedOption}
 		clearable={false}
+		searchable={false}
 		placeholder="Select Set"
 		class={`w-30! bg-theme! ${loading && 'opacity-0'} border-white/10!`}
 	>
