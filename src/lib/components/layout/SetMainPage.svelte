@@ -6,12 +6,13 @@
 	import { GridCard } from '$lib/components';
 	import { countRarities, getCardId } from '$lib/util';
 
-    let { setId }: { setId: string } = $props();
+	let { setId }: { setId: string } = $props();
 
 	const setIdLower = $derived(setId.toLowerCase());
 
 	let setData = $state<CardSet | null>(null);
 	let cards = $state<Record<string, Card>>({});
+	let spCards = $state<Card[]>([]);
 	let loading = $state(true);
 	let error = $state<string | null>(null);
 
@@ -29,6 +30,7 @@
 				if (setIdLower === id) {
 					setData = result.data;
 					cards = result.cards;
+					spCards = result.spCards;
 				}
 			})
 			.catch((err) => {
@@ -80,10 +82,22 @@
 				<GridCard
 					id={getCardId(id + 1, setIdLower)}
 					card={cards[getCardId(id + 1, setIdLower)]}
+					set={setIdLower}
 					hideUnrevealedCards={toggles.hideUnrevealedCards}
 					showAltArts={toggles.showAltArts}
 				/>
 			{/each}
+			{#if toggles.showAltArts}
+				{#each spCards as card}
+					<GridCard
+						id={card.id}
+						card={card}
+						set={setIdLower}
+						hideUnrevealedCards={toggles.hideUnrevealedCards}
+						showAltArts={toggles.showAltArts}
+					/>
+				{/each}
+			{/if}
 		</div>
 	{/if}
 </main>

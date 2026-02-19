@@ -65,14 +65,13 @@ export class Card {
         return this.parallel_status !== "Base";
     }
 
-    getImage(type: 'thumbnails' | 'images', parallel_status: ParallelStatus): string {
-        const setPrefix = this.id.split("-")[0].toLowerCase();
+    getImage(type: 'thumbnails' | 'images', parallel_status: ParallelStatus, set: string): string {
         const cardId = this.id.toLowerCase();
         const extension = {
             base: '',
             parallel: 'a',
             manga: 'sp'
         }[parallel_status];
-        return `${baseURL}/${setPrefix}/${type}/${cardId}${extension}.webp`;
+        return `${baseURL}/${set}/${type}/${cardId}${extension}.webp`;
     }
 }

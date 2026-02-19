@@ -7,9 +7,10 @@
 
 	let {
 		card,
+		set,
 		toggleShowOverlay,
 		loadParallelStatus
-	}: { card: Card; toggleShowOverlay: () => void; loadParallelStatus: ParallelStatus } = $props();
+	}: { card: Card; set: string; toggleShowOverlay: () => void; loadParallelStatus: ParallelStatus } = $props();
 
 	let parallelStatus: ParallelStatus = $derived(loadParallelStatus);
 
@@ -31,7 +32,7 @@
 		<X />
 	</button>
 	<CacheImage
-		src={card.getImage('images', parallelStatus)}
+		src={card.getImage('images', parallelStatus, set)}
 		alt={card.id}
 		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10"
 		style="aspect-ratio: 416 / 580"

@@ -6,11 +6,12 @@ import { fetchJson } from "$lib/util";
 import { baseURL } from "$lib/constants";
 
 export async function loadData(set: string) {
-    const fetchedData: { "data": CardSetJSON, "cards": CardJSON[] } = await fetchJson(`${baseURL}/${set}/${set}.json`);
+    const fetchedData: { "data": CardSetJSON, "cards": CardJSON[], "sp_cards": CardJSON[] } = await fetchJson(`${baseURL}/${set}/${set}.json`);
     return {
         "data": new CardSet(fetchedData["data"]),
         "cards": Object.fromEntries(
             fetchedData.cards.map((c) => [c.id.toLowerCase(), new Card(c)])
-        )
+        ),
+        "spCards": fetchedData.sp_cards.map((c) => new Card(c))
     }
 }
