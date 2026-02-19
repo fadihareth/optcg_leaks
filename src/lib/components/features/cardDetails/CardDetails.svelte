@@ -22,11 +22,18 @@
 		parallelStatus = parallelStatus === 'manga' ? 'base' : 'manga';
 	}
 
+	function next() {
+		changeCard(1);
+	}
+	function prev() {
+		changeCard(-1);
+	}
+
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key === 'ArrowLeft') {
-			changeCard(-1);
+			prev();
 		} else if (event.key === 'ArrowRight') {
-			changeCard(1);
+			next();
 		}
 	}
 </script>
@@ -42,22 +49,14 @@
 	>
 		<IconX />
 	</button>
-	<button
-		onclick={() => {
-			changeCard(1);
-		}}
-		class="arrow-button right-6 xl:-right-16"
-	>
-		<IconChevronRight class="h-full w-full" />
-	</button>
-	<button
-		onclick={() => {
-			changeCard(-1);
-		}}
-		class="arrow-button left-6 xl:-left-16"
-	>
-		<IconChevronLeft class="h-full w-full" />
-	</button>
+	<div class="absolute w-full h-full" style="aspect-ratio: 416 / 580">
+		<button onclick={next} class="arrow-button max-md:right-6 right-10 xl:-right-10">
+			<IconChevronRight class="h-full w-full" />
+		</button>
+		<button onclick={prev} class="arrow-button max-md:left-6 left-2 xl:-left-18">
+			<IconChevronLeft class="h-full w-full" />
+		</button>
+	</div>
 	<CacheImage
 		src={card.getImage('images', parallelStatus, set)}
 		alt={card.id}
