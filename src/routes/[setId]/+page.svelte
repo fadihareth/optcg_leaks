@@ -5,4 +5,6 @@
 	const setId = $derived((page.params as unknown as { setId: string }).setId);
 </script>
 
-<SetMainPage {setId} />
+{#key setId}
+	<SetMainPage {setId} />
+{/key}
