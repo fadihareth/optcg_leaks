@@ -1,7 +1,7 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
 
-    let { open = $bindable(), onClose, children } = $props();
+    let { open, onClose, children } = $props();
 </script>
 
 {#if open}

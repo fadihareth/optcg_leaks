@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { GridHeader, Header } from '$lib/components';
-	import { Card } from '$lib/models/Card';
+	import { CardDetails, GridCard, GridHeader, Header, Overlay } from '$lib/components';
+	import type { Card } from '$lib/models/Card';
 	import { CardSet } from '$lib/models/CardSet';
 	import { loadData } from '$lib/stores/data';
-	import { GridCard } from '$lib/components';
 	import { countRarities, getCardId } from '$lib/util';
 
 	let { setId }: { setId: string } = $props();
 
 	const setIdLower = $derived(setId.toLowerCase());
 
+	// Card data and fetch
 	let setData = $state<CardSet | null>(null);
 	let cards = $state<Record<string, Card>>({});
 	let spCards = $state<Card[]>([]);
@@ -48,6 +48,20 @@
 			});
 	});
 
+	// Card details data
+	let selectedCard = $state<Card | null>(null);
+	function selectCard(card: Card | null = null) {
+		selectedCard = card;
+		const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+		if (selectedCard !== null) {
+			document.body.style.overflow = 'hidden';
+			document.body.style.paddingRight = `${scrollbarWidth}px`;
+		} else {
+			document.body.style.overflow = 'unset';
+			document.body.style.paddingRight = '0';
+		}
+	}
+
 	const pageTitle = $derived(`${setId.toUpperCase()} Cardlist`);
 </script>
 
@@ -83,6 +97,7 @@
 					id={getCardId(id + 1, setIdLower)}
 					card={cards[getCardId(id + 1, setIdLower)]}
 					set={setIdLower}
+					{selectCard}
 					hideUnrevealedCards={toggles.hideUnrevealedCards}
 					showAltArts={toggles.showAltArts}
 				/>
@@ -91,8 +106,9 @@
 				{#each spCards as card}
 					<GridCard
 						id={card.id}
-						card={card}
+						{card}
 						set={setIdLower}
+						{selectCard}
 						hideUnrevealedCards={toggles.hideUnrevealedCards}
 						showAltArts={toggles.showAltArts}
 					/>
@@ -101,3 +117,7 @@
 		</div>
 	{/if}
 </main>
+
+<Overlay open={selectedCard !== null} onClose={selectCard}>
+	<CardDetails card={selectedCard!} set={setIdLower} toggleShowOverlay={selectCard} />
+</Overlay>

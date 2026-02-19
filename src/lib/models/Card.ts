@@ -22,25 +22,27 @@ export type CardJSON = {
 }
 
 export class Card {
-    id: string;
-    name: string;
-    category: string;
-    color: [string];
-    attribute: [string];
-    rarity: string;
-    type: [string];
-    power: number;
+    readonly id: string;
+    readonly name: string;
+    readonly category: string;
+    readonly color: [string];
+    readonly attribute: [string];
+    readonly rarity: string;
+    readonly type: [string];
+    readonly power: number;
 
-    effect: string;
-    trigger: string;
+    readonly effect: string;
+    readonly trigger: string;
 
-    cost: number;
-    counter: string;
-    life: number;
+    readonly cost: number;
+    readonly counter: string;
+    readonly life: number;
 
-    parallel_status: string;
-    has_manga: boolean;
-    translation_credit: string;
+    readonly parallel_status: string;
+    readonly has_manga: boolean;
+    readonly translation_credit: string;
+
+    curr_rarity: ParallelStatus = "base";
 
     constructor(data: CardJSON) {
         this.id = data.id;
