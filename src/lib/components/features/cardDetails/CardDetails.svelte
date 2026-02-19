@@ -45,7 +45,7 @@
 >
 	<button
 		onclick={() => toggleShowOverlay()}
-		class="absolute top-4 right-4 h-8 w-8 rounded-full p-1 hover:cursor-pointer hover:bg-white/10"
+		class="absolute top-4 right-4 h-8 w-8 z-20 rounded-full p-1 hover:cursor-pointer hover:bg-white/10"
 	>
 		<IconX />
 	</button>
