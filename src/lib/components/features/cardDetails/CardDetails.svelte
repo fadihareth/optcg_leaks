@@ -49,7 +49,7 @@
 	>
 		<IconX />
 	</button>
-	<div class="absolute w-full h-full" style="aspect-ratio: 416 / 580">
+	<div class="absolute w-full md:h-full" style="aspect-ratio: 416 / 580">
 		<button onclick={next} class="arrow-button max-md:right-6 right-10 xl:-right-10">
 			<IconChevronRight class="h-full w-full" />
 		</button>
