@@ -12,6 +12,9 @@
 	// Card data and fetch
 	let setData = $state<CardSet | null>(null);
 	let cards = $state<Record<string, Card>>({});
+	const availableCards = $derived<Card[]>(
+		Object.values(cards).sort((a, b) => a.id.localeCompare(b.id))
+	);
 	let spCards = $state<Card[]>([]);
 	let loading = $state(true);
 	let error = $state<string | null>(null);
@@ -64,27 +67,17 @@
 	function changeCard(direction: 1 | -1) {
 		if (!selectedCard || !setData) return;
 
-		const currentId = selectedCard.id;
-		const [prefix, cardNumber] = currentId.split('-');
-		const maxCount = setData.cardCount;
+		const allCards = availableCards.concat(toggles.showAltArts ? spCards : []);
+		const maxCount = allCards.length - 1;
+		let currentIndex = allCards.findIndex((card) => card.id === selectedCard?.id);
 
-		let currentNumber = parseInt(cardNumber);
-
-		// Try at most cardCount times to avoid infinite loops
-		for (let i = 0; i < maxCount; i++) {
+		if (currentIndex >= 0) {
 			if (direction === 1) {
-				currentNumber = (currentNumber % maxCount) + 1;
+				currentIndex = currentIndex === maxCount ? 0 : currentIndex + 1;
 			} else {
-				currentNumber = currentNumber === 1 ? maxCount : currentNumber - 1;
+				currentIndex = currentIndex === 0 ? maxCount : currentIndex - 1;
 			}
-
-			const nextId = getCardId(currentNumber, prefix);
-			const nextCard = cards[nextId.toLowerCase()];
-
-			if (nextCard) {
-				selectedCard = nextCard;
-				return;
-			}
+			selectedCard = allCards[currentIndex];
 		}
 	}
 
@@ -145,10 +138,5 @@
 </main>
 
 <Overlay open={selectedCard !== null} onClose={selectCard}>
-	<CardDetails
-		card={selectedCard!}
-		set={setIdLower}
-		toggleShowOverlay={selectCard}
-		{changeCard}
-	/>
+	<CardDetails card={selectedCard!} set={setIdLower} toggleShowOverlay={selectCard} {changeCard} />
 </Overlay>
