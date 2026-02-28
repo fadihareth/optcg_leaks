@@ -28,25 +28,30 @@
 	}
 </script>
 
-<header class="p-layout sticky top-0 z-50 flex items-center justify-between bg-theme shadow-xs">
-	<h1 class="text-xl font-semibold">OPTCG Leaks</h1>
-	<Select
-		items={options}
-		value={selectedOption}
-		clearable={false}
-		searchable={false}
-		placeholder="Select Set"
-		class={`w-30! bg-theme! ${loading && 'opacity-0'} border-white/10!`}
-	>
-		<div slot="list" let:filteredItems class="bg-theme">
-			{#each filteredItems as item}
-				<button
-					onclick={() => handleSelectChange(item)}
-					class="flex w-full items-center p-3 hover:bg-white/10"
-				>
-					{item.label}
-				</button>
-			{/each}
-		</div>
-	</Select>
-</header>
+<div class="flex flex-col gap-0">
+	<p class="xl:px-20 max-xl:px-6 py-1 w-full bg-yellow-50/10">
+		Note: this site will temporarily not be updated with new card reveals until 03/16
+	</p>
+	<header class="p-layout sticky top-0 z-50 flex items-center justify-between bg-theme shadow-xs">
+		<h1 class="text-xl font-semibold">OPTCG Leaks</h1>
+		<Select
+			items={options}
+			value={selectedOption}
+			clearable={false}
+			searchable={false}
+			placeholder="Select Set"
+			class={`w-30! bg-theme! ${loading && 'opacity-0'} border-white/10!`}
+		>
+			<div slot="list" let:filteredItems class="bg-theme">
+				{#each filteredItems as item}
+					<button
+						onclick={() => handleSelectChange(item)}
+						class="flex w-full items-center p-3 hover:bg-white/10"
+					>
+						{item.label}
+					</button>
+				{/each}
+			</div>
+		</Select>
+	</header>
+</div>
