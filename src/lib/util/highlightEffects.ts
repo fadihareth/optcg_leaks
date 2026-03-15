@@ -1,13 +1,13 @@
 const EFFECTS: Record<string, RegExp[]> = {
     "blue-effect": [
         /\[On Play\]/gi,
-        /\[Activate Main\]/gi,
+        /\[Activate: Main\]/gi,
         /\[When Attacking\]/gi,
         /\[Your Turn\]/gi,
         /\[End of Your Turn\]/gi,
         /\[On K.O.\]/gi,
-        /\[Opponent’s Turn\]/gi,
-        /\[On Your Opponent’s Attack\]/gi,
+        /\[Opponent's Turn\]/gi,
+        /\[On Your Opponent's Attack\]/gi,
         /\[Main\]/gi,
     ],
     "red-effect": [
