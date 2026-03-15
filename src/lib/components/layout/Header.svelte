@@ -40,9 +40,14 @@
 			clearable={false}
 			searchable={false}
 			placeholder="Select Set"
+			showChevron
 			class={`w-30! bg-theme! ${loading && 'opacity-0'} border-white/10!`}
 		>
-			<div slot="list" let:filteredItems class="bg-theme">
+			<div
+				slot="list"
+				let:filteredItems
+				class="bg-theme max-h-60 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+			>
 				{#each filteredItems as item}
 					<button
 						onclick={() => handleSelectChange(item)}
