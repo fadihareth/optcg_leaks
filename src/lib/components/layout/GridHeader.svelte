@@ -31,8 +31,10 @@
 	</div>
 	<div class="w-full border border-white/10"></div>
 	<div class="flex flex-wrap gap-x-4 text-white/70">
-		<p>&#x1F1EF;&#x1F1F5; Japan: {data.japan_release}</p>
-		<p class="max-md:hidden">/</p>
+		{#if data.japan_release !== ""}
+			<p>&#x1F1EF;&#x1F1F5; Japan: {data.japan_release}</p>
+			<p class="max-md:hidden">/</p>
+		{/if}
 		<p>&#x1F30E; Global: {data.global_release}</p>
 	</div>
 	<div class="my-2 flex flex-wrap gap-x-2 gap-y-4">
