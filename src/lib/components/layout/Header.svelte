@@ -29,9 +29,9 @@
 </script>
 
 <div class="flex flex-col gap-0">
-	<p class="xl:px-20 max-xl:px-6 py-1 w-full bg-yellow-50/10">
+	<!-- <p class="xl:px-20 max-xl:px-6 py-1 w-full bg-yellow-50/10">
 		Note: this site will temporarily not be updated with new card reveals until 03/16
-	</p>
+	</p> -->
 	<header class="p-layout sticky top-0 z-50 flex items-center justify-between bg-theme shadow-xs">
 		<h1 class="text-xl font-semibold">OPTCG Leaks</h1>
 		<Select
