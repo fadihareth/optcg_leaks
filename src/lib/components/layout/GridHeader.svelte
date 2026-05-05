@@ -39,7 +39,7 @@
 	</div>
 	<div class="my-2 flex flex-wrap gap-x-2 gap-y-4">
 		{#each ['L', 'C', 'UC', 'R', 'SR', 'SEC'] as r}
-			<p class="whitespace-nowrap">
+			<p class="whitespace-nowrap" class:opacity-70={count[r] === data.rarities[r]}>
 				<span class="tag inline md:hidden">
 					{r} - {count[r]} / {data.rarities[r]}
 				</span>
