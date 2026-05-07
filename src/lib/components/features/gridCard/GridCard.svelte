@@ -28,6 +28,7 @@
 	<button
 		onclick={() => onSelectCard(card, 'base')}
 		class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
+		class:holo={card.is_SP}
 		style="aspect-ratio: 416 / 580"
 	>
 		<CacheImage

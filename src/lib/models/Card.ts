@@ -19,6 +19,7 @@ export type CardJSON = {
     parallel_status: string;
     has_manga?: boolean;
     translation_credit: string;
+    is_SP: boolean;
 }
 
 export class Card {
@@ -41,10 +42,11 @@ export class Card {
     readonly parallel_status: string;
     readonly has_manga: boolean;
     readonly translation_credit: string;
+    readonly is_SP: boolean;
 
     curr_rarity: ParallelStatus = "base";
 
-    constructor(data: CardJSON) {
+    constructor(data: CardJSON, isSP: boolean) {
         this.id = data.id;
         this.name = data.name;
         this.category = data.category;
@@ -61,6 +63,7 @@ export class Card {
         this.parallel_status = data.parallel_status;
         this.has_manga = data.has_manga ?? false;
         this.translation_credit = data.translation_credit;
+        this.is_SP = isSP;
     }
 
     get hasAltArt(): boolean {

@@ -10,8 +10,8 @@ export async function loadData(set: string) {
     return {
         "data": new CardSet(fetchedData["data"]),
         "cards": Object.fromEntries(
-            fetchedData.cards.map((c) => [c.id.toLowerCase(), new Card(c)])
+            fetchedData.cards.map((c) => [c.id.toLowerCase(), new Card(c, false)])
         ),
-        "spCards": fetchedData.sp_cards.map((c) => new Card(c))
+        "spCards": fetchedData.sp_cards.map((c) => new Card(c, true))
     }
 }
