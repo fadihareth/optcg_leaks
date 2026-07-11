@@ -66,6 +66,10 @@ export class Card {
         this.is_SP = isSP;
     }
 
+    get hasBaseArt(): boolean {
+        return this.parallel_status !== "Parallel";
+    }
+
     get hasAltArt(): boolean {
         return this.parallel_status !== "Base";
     }

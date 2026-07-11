@@ -25,18 +25,20 @@
 </script>
 
 {#if card}
-	<button
-		onclick={() => onSelectCard(card, 'base')}
-		class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
-		class:holo={card.is_SP}
-		style="aspect-ratio: 416 / 580"
-	>
-		<CacheImage
-			src={card.getImage('thumbnails', 'base', set)}
-			alt={card.id}
-			tags="h-full w-full rounded"
-		/>
-	</button>
+    {#if card.hasBaseArt}
+        <button
+            onclick={() => onSelectCard(card, 'base')}
+            class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
+            class:holo={card.is_SP}
+            style="aspect-ratio: 416 / 580"
+        >
+            <CacheImage
+                src={card.getImage('thumbnails', 'base', set)}
+                alt={card.id}
+                tags="h-full w-full rounded"
+            />
+        </button>
+    {/if}
 	{#if card.hasAltArt}
 		<button
 			onclick={() => onSelectCard(card, 'parallel')}
