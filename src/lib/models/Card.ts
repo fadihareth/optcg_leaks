@@ -76,11 +76,14 @@ export class Card {
 
     getImage(type: 'thumbnails' | 'images', parallel_status: ParallelStatus, set: string): string {
         const cardId = this.id.toLowerCase();
-        const extension = {
+        let extension = {
             base: '',
             parallel: 'a',
             manga: 'sp'
         }[parallel_status];
+        if (this.parallel_status === "Parallel") {
+            extension = 'a';
+        }
         return `${baseURL}/${set}/${type}/${cardId}${extension}.webp`;
     }
 }
