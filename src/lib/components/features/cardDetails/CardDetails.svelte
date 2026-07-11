@@ -98,13 +98,13 @@
 		{#if card.translation_credit !== ''}
 			<p class="text-white/70">Translated by: {card.translation_credit}</p>
 		{/if}
-		{#if card.hasAltArt}
+		{#if card.hasAltArt && card.hasBaseArt}
 			<div class="flex flex-wrap gap-x-4">
 				<Toggle toggled={parallelStatus === 'parallel'} onclick={toggleShowAltArt} hideLabel />
 				<p class="text-white/70">Show Alternate Art</p>
 			</div>
 		{/if}
-		{#if card.has_manga}
+		{#if card.has_manga && card.hasBaseArt}
 			<div class="flex flex-wrap gap-x-4">
 				<Toggle toggled={parallelStatus === 'manga'} onclick={toggleShowMangaArt} hideLabel />
 				<p class="text-white/70">Show Manga Art</p>
