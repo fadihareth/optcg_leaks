@@ -16,6 +16,7 @@
 		Object.values(cards).sort((a, b) => a.id.localeCompare(b.id))
 	);
 	let spCards = $state<Card[]>([]);
+    let unknownIdCards = $state<Card[]>([]);
 	let loading = $state(true);
 	let error = $state<string | null>(null);
 
@@ -34,6 +35,7 @@
 					setData = result.data;
 					cards = result.cards;
 					spCards = result.spCards;
+                    unknownIdCards = result.unknownIdCards;
 				}
 			})
 			.catch((err) => {
@@ -42,6 +44,8 @@
 					console.error('Error loading data:', err);
 					setData = null;
 					cards = {};
+                    spCards = [];
+                    unknownIdCards = [];
 				}
 			})
 			.finally(() => {
@@ -67,7 +71,7 @@
 	function changeCard(direction: 1 | -1) {
 		if (!selectedCard || !setData) return;
 
-		const allCards = availableCards.concat(toggles.showAltArts ? spCards : []);
+		const allCards = availableCards.concat(unknownIdCards).concat(toggles.showAltArts ? spCards : []);
 		const maxCount = allCards.length - 1;
 		let currentIndex = allCards.findIndex((card) => card.id === selectedCard?.id);
 
@@ -121,6 +125,16 @@
 					showAltArts={toggles.showAltArts}
 				/>
 			{/each}
+            {#each unknownIdCards as card}
+                <GridCard
+					id={card.id}
+					card={card}
+					set={setIdLower}
+					{selectCard}
+					hideUnrevealedCards={toggles.hideUnrevealedCards}
+					showAltArts={toggles.showAltArts}
+				/>
+            {/each}
 			{#if toggles.showAltArts}
 				{#each spCards as card}
 					<GridCard
