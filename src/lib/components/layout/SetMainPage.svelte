@@ -107,7 +107,7 @@
 	{:else if setData}
 		<GridHeader
 			data={setData}
-			count={countRarities(cards)}
+			count={countRarities(Object.values(cards).concat(unknownIdCards))}
 			bind:hideUnrevealedCards={toggles.hideUnrevealedCards}
 			bind:showAltArts={toggles.showAltArts}
 		/>
