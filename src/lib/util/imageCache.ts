@@ -1,4 +1,4 @@
-const CACHE_NAME = 'thumbnail-cache-v1';
+const CACHE_NAME = 'thumbnail-cache-v2';
 
 export default async function getCachedImage(url: string): Promise<string> {
     const cache = await caches.open(CACHE_NAME);
@@ -14,4 +14,14 @@ export default async function getCachedImage(url: string): Promise<string> {
     await cache.put(url, response.clone());
 
     return URL.createObjectURL(await response.blob());
+}
+
+export async function cleanupCaches() {
+    const cacheNames = await caches.keys();
+
+    await Promise.all(
+        cacheNames
+            .filter(name => name.startsWith('thumbnail-cache-') && name !== CACHE_NAME)
+            .map(name => caches.delete(name))
+    );
 }

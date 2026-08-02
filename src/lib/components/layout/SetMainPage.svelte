@@ -3,7 +3,7 @@
 	import type { Card } from '$lib/models/Card';
 	import { CardSet } from '$lib/models/CardSet';
 	import { loadData } from '$lib/stores/data';
-	import { countRarities, getCardId } from '$lib/util';
+	import { cleanupCaches, countRarities, getCardId } from '$lib/util';
 
 	let { setId }: { setId: string } = $props();
 
@@ -52,6 +52,7 @@
 				if (setIdLower === id) {
 					loading = false;
 				}
+                cleanupCaches();
 			});
 	});
 
