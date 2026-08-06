@@ -1,4 +1,4 @@
-const CACHE_NAME = 'thumbnail-cache-v2';
+const CACHE_NAME = 'thumbnail-cache-v3';
 
 export default async function getCachedImage(url: string): Promise<string> {
     const cache = await caches.open(CACHE_NAME);
