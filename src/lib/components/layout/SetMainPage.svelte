@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { CardDetails, GridCard, GridHeader, Header, Overlay } from '$lib/components';
-	import type { Card } from '$lib/models/Card';
+	import type { Card } from '$lib/models/Card.svelte';
 	import { CardSet } from '$lib/models/CardSet';
 	import { loadData } from '$lib/stores/data';
 	import { cleanupCaches, countRarities, getCardId } from '$lib/util';
@@ -72,9 +72,24 @@
 	function changeCard(direction: 1 | -1) {
 		if (!selectedCard || !setData) return;
 
-		const allCards = availableCards.concat(unknownIdCards).concat(toggles.showAltArts ? spCards : []);
+        let allCards = availableCards.flatMap(card => {
+            if (toggles.showAltArts) {
+                return card.images.map(image => ({
+                    ...card,
+                    curr_rarity: image
+                }));
+            } else {
+                return { ...card, curr_rarity: card.images[0] };
+            }
+        });
+		allCards = allCards.concat(unknownIdCards).concat(toggles.showAltArts ? spCards : []);
 		const maxCount = allCards.length - 1;
-		let currentIndex = allCards.findIndex((card) => card.id === selectedCard?.id);
+        let currentIndex = 0;
+        if (toggles.showAltArts) {
+            currentIndex = allCards.findIndex((card) => card.curr_rarity.id === selectedCard?.curr_rarity.id);
+        } else {
+            currentIndex = allCards.findIndex((card) => card.id === selectedCard?.id);
+        }
 
 		if (currentIndex >= 0) {
 			if (direction === 1) {

@@ -1,4 +1,4 @@
-import type { Card } from "$lib/models/Card";
+import type { Card } from "$lib/models/Card.svelte";
 
 export default function countRarities(cards: Card[]) {
 	const count: Record<string, number> = {

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import type { Card, ParallelStatus } from '$lib/models/Card';
+	import type { Card, imageData } from '$lib/models/Card.svelte';
+    import { baseURL } from "$lib/constants";
 	import { CacheImage } from '$lib/components';
 
 	let {
@@ -18,57 +19,29 @@
 		showAltArts: boolean;
 	} = $props();
 
-	function onSelectCard(card: Card, parallelStatus: ParallelStatus) {
-		card.curr_rarity = parallelStatus;
+	function onSelectCard(card: Card, imageData: imageData) {
+		card.curr_rarity = imageData;
 		selectCard(card);
 	}
 </script>
 
 {#if card}
-    {#if card.hasBaseArt}
+    {#each card.images as image, i}
         <button
-            onclick={() => onSelectCard(card, 'base')}
+            onclick={() => onSelectCard(card, image)}
             class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
-            class:holo={card.is_SP}
+            class:holo={image.name !== "Base Art"}
+            class:block={showAltArts || i > 0}
+			class:hidden={!showAltArts && i > 0}
             style="aspect-ratio: 416 / 580"
         >
             <CacheImage
-                src={card.getImage('thumbnails', 'base', set)}
+                src={`${baseURL}/${set}/thumbnails/${image.id}.webp`}
                 alt={card.id}
                 tags="h-full w-full rounded"
             />
         </button>
-    {/if}
-	{#if card.hasAltArt}
-		<button
-			onclick={() => onSelectCard(card, 'parallel')}
-			class="holo h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
-			class:block={showAltArts}
-			class:hidden={!showAltArts}
-			style="aspect-ratio: 416 / 580"
-		>
-			<CacheImage
-				src={card.getImage('thumbnails', 'parallel', set)}
-				alt={card.id}
-				tags="h-full w-full rounded"
-			/>
-		</button>
-	{/if}
-	{#if card.has_manga}
-		<button
-			onclick={() => onSelectCard(card, 'manga')}
-			class="holo h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
-			class:block={showAltArts}
-			class:hidden={!showAltArts}
-			style="aspect-ratio: 416 / 580"
-		>
-			<CacheImage
-				src={card.getImage('thumbnails', 'manga', set)}
-				alt={card.id}
-				tags="h-full w-full rounded"
-			/>
-		</button>
-	{/if}
+    {/each}
 {:else if !hideUnrevealedCards}
 	<p
 		class="flex flex-col justify-around rounded bg-white/30 text-center text-white/60 shadow-lg"

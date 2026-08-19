@@ -1,6 +1,9 @@
 import { baseURL } from "$lib/constants";
 
-export type ParallelStatus = 'base' | 'parallel' | 'manga';
+export type imageData = {
+    name: string;
+    id: string;
+}
 
 export type CardJSON = {
     id: string;
@@ -16,10 +19,8 @@ export type CardJSON = {
     cost: number;
     counter: string;
     life: number;
-    parallel_status: string;
-    has_manga?: boolean;
+    images: [imageData];
     translation_credit: string;
-    is_SP: boolean;
 }
 
 export class Card {
@@ -38,15 +39,11 @@ export class Card {
     readonly cost: number;
     readonly counter: string;
     readonly life: number;
+    readonly images: [imageData];
 
-    readonly parallel_status: string;
-    readonly has_manga: boolean;
     readonly translation_credit: string;
-    readonly is_SP: boolean;
 
-    curr_rarity: ParallelStatus = "base";
-
-    constructor(data: CardJSON, isSP: boolean) {
+    constructor(data: CardJSON) {
         this.id = data.id;
         this.name = data.name;
         this.category = data.category;
@@ -60,30 +57,10 @@ export class Card {
         this.cost = data.cost;
         this.counter = data.counter;
         this.life = data.life;
-        this.parallel_status = data.parallel_status;
-        this.has_manga = data.has_manga ?? false;
+        this.images = data.images;
         this.translation_credit = data.translation_credit;
-        this.is_SP = isSP;
+        this.curr_rarity = data.images[0];
     }
 
-    get hasBaseArt(): boolean {
-        return this.parallel_status !== "Parallel";
-    }
-
-    get hasAltArt(): boolean {
-        return this.parallel_status !== "Base";
-    }
-
-    getImage(type: 'thumbnails' | 'images', parallel_status: ParallelStatus, set: string): string {
-        const cardId = this.id.toLowerCase();
-        let extension = {
-            base: '',
-            parallel: 'a',
-            manga: 'sp'
-        }[parallel_status];
-        if (this.parallel_status === "Parallel") {
-            extension = 'a';
-        }
-        return `${baseURL}/${set}/${type}/${cardId}${extension}.webp`;
-    }
+    curr_rarity = $state<imageData>({ name: "", id: "" });
 }

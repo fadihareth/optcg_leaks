@@ -1,26 +1,20 @@
 <script lang="ts">
-	import type { Card, ParallelStatus } from '$lib/models/Card';
+    import { baseURL } from "$lib/constants";
+    import Select from 'svelte-select';
+	import type { Card, imageData } from '$lib/models/Card.svelte';
 	import { CacheImage } from '$lib/components/ui';
 	import { highlightEffects } from '$lib/util';
 	import { IconX, IconChevronRight, IconChevronLeft } from '@tabler/icons-svelte';
-	import Toggle from 'svelte-toggle';
 
 	let {
 		card,
 		set,
 		toggleShowOverlay,
 		changeCard
-	}: { card: Card; set: string; toggleShowOverlay: () => void; changeCard: (d: 1 | -1) => void } =
-		$props();
+	}: { card: Card; set: string; toggleShowOverlay: () => void; changeCard: (d: 1 | -1) => void } = $props();
 
-	let parallelStatus: ParallelStatus = $derived(card.curr_rarity);
-
-	function toggleShowAltArt() {
-		parallelStatus = parallelStatus === 'parallel' ? 'base' : 'parallel';
-	}
-	function toggleShowMangaArt() {
-		parallelStatus = parallelStatus === 'manga' ? 'base' : 'manga';
-	}
+    let listOpen = $state(false);
+    let focused = $state(false);
 
 	function next() {
 		changeCard(1);
@@ -28,6 +22,12 @@
 	function prev() {
 		changeCard(-1);
 	}
+
+    function handleImageIdChange(imageData: imageData) {
+        card.curr_rarity = imageData;
+        listOpen = false;
+        focused = false;
+    }
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (!card) return;
@@ -61,7 +61,7 @@
 		</button>
 	</div>
 	<CacheImage
-		src={card.getImage('images', parallelStatus, set)}
+		src={`${baseURL}/${set}/images/${card.curr_rarity.id}.webp`}
 		alt={card.id}
 		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10"
 		style="aspect-ratio: 416 / 580"
@@ -98,17 +98,32 @@
 		{#if card.translation_credit !== ''}
 			<p class="text-white/70">Translated by: {card.translation_credit}</p>
 		{/if}
-		{#if card.hasAltArt && card.hasBaseArt}
-			<div class="flex flex-wrap gap-x-4">
-				<Toggle toggled={parallelStatus === 'parallel'} onclick={toggleShowAltArt} hideLabel />
-				<p class="text-white/70">Show Alternate Art</p>
-			</div>
-		{/if}
-		{#if card.has_manga && card.hasBaseArt}
-			<div class="flex flex-wrap gap-x-4">
-				<Toggle toggled={parallelStatus === 'manga'} onclick={toggleShowMangaArt} hideLabel />
-				<p class="text-white/70">Show Manga Art</p>
-			</div>
-		{/if}
+        {#if card.images.length > 1}
+            <Select
+                items={card.images}
+                value={card.curr_rarity.name}
+                clearable={false}
+                searchable={false}
+                bind:listOpen
+                bind:focused
+                showChevron
+                class={`bg-theme! border-white/10!`}
+            >
+                <div
+                    slot="list"
+                    let:filteredItems
+                    class="bg-theme-dark overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                >
+                    {#each filteredItems as item}
+                        <button
+                            onclick={() => handleImageIdChange(item)}
+                            class="flex w-full items-center p-3 hover:bg-white/10"
+                        >
+                            {item.name}
+                        </button>
+                    {/each}
+                </div>
+            </Select>
+        {/if}
 	</div>
 </div>
