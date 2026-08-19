@@ -1,7 +1,9 @@
-const CACHE_NAME = 'thumbnail-cache-v3';
+import { getMetaData } from "$lib/stores/meta";
+
+const metadata = await getMetaData();
 
 export default async function getCachedImage(url: string): Promise<string> {
-    const cache = await caches.open(CACHE_NAME);
+    const cache = await caches.open(metadata.cache_name);
     const cached = await cache.match(url);
 
     if (cached) {
@@ -21,7 +23,7 @@ export async function cleanupCaches() {
 
     await Promise.all(
         cacheNames
-            .filter(name => name.startsWith('thumbnail-cache-') && name !== CACHE_NAME)
+            .filter(name => name.startsWith('thumbnail-cache-') && name !== metadata.cache_name)
             .map(name => caches.delete(name))
     );
 }
