@@ -1,6 +1,6 @@
 <script lang="ts">
     import { baseURL } from "$lib/constants";
-    import Select from 'svelte-select';
+    import { Select } from "$lib/components/ui";
 	import type { Card, imageData } from '$lib/models/Card.svelte';
 	import { CacheImage } from '$lib/components/ui';
 	import { highlightEffects } from '$lib/util';
@@ -100,30 +100,9 @@
 		{/if}
         {#if card.images.length > 1}
             <Select
-                items={card.images}
-                value={card.curr_rarity.name}
-                clearable={false}
-                searchable={false}
-                bind:listOpen
-                bind:focused
-                showChevron
-                class={`bg-theme! border-white/10!`}
-            >
-                <div
-                    slot="list"
-                    let:filteredItems
-                    class="bg-theme-dark overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-                >
-                    {#each filteredItems as item}
-                        <button
-                            onclick={() => handleImageIdChange(item)}
-                            class="flex w-full items-center p-3 hover:bg-white/10"
-                        >
-                            {item.name}
-                        </button>
-                    {/each}
-                </div>
-            </Select>
+                options={ card.images.map((i) => { return { label: i.name, value: i.id } }) }
+                bind:value={ card.curr_rarity.id }
+            />
         {/if}
 	</div>
 </div>

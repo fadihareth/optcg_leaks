@@ -39,6 +39,6 @@
 	},
 	"dependencies": {
 		"@tabler/icons-svelte": "^3.36.1",
-		"svelte-select": "^5.8.3"
+		"bits-ui": "^2.19.0"
 	}
 }

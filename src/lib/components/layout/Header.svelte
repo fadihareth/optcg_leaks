@@ -1,30 +1,18 @@
 <script lang="ts">
-	import Select from 'svelte-select';
+    import { Select } from "$lib/components/ui";
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { SET_IDS } from '$lib/constants';
 
-	let { loading }: { loading: boolean } = $props();
-
-	const currentSetId = $derived(() => {
-		const params = page.params as { setId?: string };
-		return params?.setId?.toLowerCase() || SET_IDS[0];
-	});
+	let value = $state(page.params?.setId?.toLowerCase() || SET_IDS[0]);
 
 	const options = SET_IDS.map((id) => ({
 		value: id,
 		label: id.toUpperCase()
 	}));
 
-	const selectedOption = $derived(
-		options.find((opt) => opt.value === currentSetId()) || options[0]
-	);
-
-	function handleSelectChange(item: any) {
-		const selectedValue = item.value;
-		if (selectedValue && selectedValue !== currentSetId()) {
-			goto(`/${selectedValue}`);
-		}
+	function handleSelectChange(value: string | undefined) {
+		goto(`/${value}`);
 	}
 </script>
 
@@ -34,29 +22,11 @@
 	</p> -->
 	<header class="p-layout sticky top-0 z-50 flex items-center justify-between bg-theme shadow-xs">
 		<h1 class="text-xl font-semibold">OPTCG Leaks</h1>
-		<Select
-			items={options}
-			value={selectedOption}
-			clearable={false}
-			searchable={false}
-			placeholder="Select Set"
-			showChevron
-			class={`w-30! bg-theme! ${loading && 'opacity-0'} border-white/10!`}
-		>
-			<div
-				slot="list"
-				let:filteredItems
-				class="bg-theme max-h-60 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-			>
-				{#each filteredItems as item}
-					<button
-						onclick={() => handleSelectChange(item)}
-						class="flex w-full items-center p-3 hover:bg-white/10"
-					>
-						{item.label}
-					</button>
-				{/each}
-			</div>
-		</Select>
+        <Select
+            {options}
+            bind:value={value}
+            onChange={handleSelectChange}
+            customClass="w-30!"
+        />
 	</header>
 </div>
