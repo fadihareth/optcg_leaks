@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { getCachedImage } from '$lib/util';
-
 	let {
 		src,
 		alt,
@@ -8,23 +6,15 @@
 		style = ''
 	}: { src: string; alt: string; tags: string; style?: string } = $props();
 	
-	let imageSrc = $state<string | null>(null);
 	let loaded = $state(false);
 
 	function onload() {
 		loaded = true;
 	}
-
-	$effect(() => {
-		loaded = false;
-		getCachedImage(src).then((res) => {
-			imageSrc = res;
-		});
-	});
 </script>
 
 <img
-    src={src}
+    {src}
     {alt}
     class={tags + ' transition-opacity duration-200'}
     {onload}

@@ -3,7 +3,7 @@
 	import type { Card } from '$lib/models/Card.svelte';
 	import { CardSet } from '$lib/models/CardSet';
 	import { loadData } from '$lib/stores/data';
-	import { cleanupCaches, countRarities, getCardId } from '$lib/util';
+	import { countRarities, getCardId } from '$lib/util';
 
 	let { setId }: { setId: string } = $props();
 
@@ -52,7 +52,6 @@
 				if (setIdLower === id) {
 					loading = false;
 				}
-                cleanupCaches();
 			});
 	});
 
