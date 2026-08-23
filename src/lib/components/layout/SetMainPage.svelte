@@ -12,9 +12,6 @@
 	// Card data and fetch
 	let setData = $state<CardSet | null>(null);
 	let cards = $state<Record<string, Card>>({});
-	const availableCards = $derived<Card[]>(
-		Object.values(cards).sort((a, b) => a.id.localeCompare(b.id))
-	);
 	let spCards = $state<Card[]>([]);
     let unknownIdCards = $state<Card[]>([]);
 	let loading = $state(true);
@@ -24,6 +21,22 @@
 		hideUnrevealedCards: false,
 		showAltArts: false
 	});
+
+    const allCards = $derived<Card[]>(
+		Object.values(cards).sort((a, b) => a.id.localeCompare(b.id))
+            .concat(unknownIdCards)
+            .concat(toggles.showAltArts ? spCards : [])
+            .flatMap(card => {
+                if (toggles.showAltArts) {
+                    return card.images.map(image => ({
+                        ...card,
+                        curr_rarity: image
+                    }));
+                } else {
+                    return { ...card, curr_rarity: card.images[0] };
+                }
+            })
+	);
 
 	$effect(() => {
 		const id = setIdLower;
@@ -71,17 +84,6 @@
 	function changeCard(direction: 1 | -1) {
 		if (!selectedCard || !setData) return;
 
-        let allCards = availableCards.flatMap(card => {
-            if (toggles.showAltArts) {
-                return card.images.map(image => ({
-                    ...card,
-                    curr_rarity: image
-                }));
-            } else {
-                return { ...card, curr_rarity: card.images[0] };
-            }
-        });
-		allCards = allCards.concat(unknownIdCards).concat(toggles.showAltArts ? spCards : []);
 		const maxCount = allCards.length - 1;
         let currentIndex = 0;
         if (toggles.showAltArts) {
