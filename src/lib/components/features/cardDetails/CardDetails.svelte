@@ -53,17 +53,17 @@
 		<IconX />
 	</button>
 	<div class="absolute w-full md:h-full" style="aspect-ratio: 416 / 580">
-		<button onclick={next} class="arrow-button right-10 max-md:right-6 xl:-right-10">
+		<button onclick={next} class="arrow-button right-10 max-md:right-6 xl:-right-10 z-2">
 			<IconChevronRight class="h-full w-full" />
 		</button>
-		<button onclick={prev} class="arrow-button left-2 max-md:left-6 xl:-left-18">
+		<button onclick={prev} class="arrow-button left-2 max-md:left-6 xl:-left-18 z-2">
 			<IconChevronLeft class="h-full w-full" />
 		</button>
 	</div>
 	<CacheImage
 		src={`${baseURL}/${set}/images/${card.curr_rarity.id}.webp`}
 		alt={card.id}
-		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10 z-10"
+		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10 z-1"
 		style="aspect-ratio: 416 / 580"
 	/>
 	<div class="flex flex-col items-start gap-4 max-xl:w-full md:pt-4">
