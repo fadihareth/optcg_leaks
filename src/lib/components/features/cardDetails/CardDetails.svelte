@@ -84,7 +84,7 @@
 		<div class="flex flex-col items-start">
 			<p class="text-xl font-semibold">Effect</p>
 			{#if card.effect === ''}
-				<p class="italic">No effect</p>
+				<p class="italic text-white/70">No effect</p>
 			{:else}
 				<p class="text-start whitespace-pre-wrap">{@html highlightEffects(card.effect)}</p>
 			{/if}
