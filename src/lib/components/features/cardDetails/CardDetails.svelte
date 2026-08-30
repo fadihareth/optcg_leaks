@@ -63,7 +63,7 @@
 	<CacheImage
 		src={`${baseURL}/${set}/images/${card.curr_rarity.id}.webp`}
 		alt={card.id}
-		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10"
+		tags="md:h-full max-md:w-full rounded-2xl object-contain max-md:mt-10 z-10"
 		style="aspect-ratio: 416 / 580"
 	/>
 	<div class="flex flex-col items-start gap-4 max-xl:w-full md:pt-4">
