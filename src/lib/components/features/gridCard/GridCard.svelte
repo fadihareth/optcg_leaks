@@ -30,7 +30,7 @@
         <button
             onclick={() => onSelectCard(card, image)}
             class="h-full w-full shadow-lg transition hover:cursor-pointer hover:brightness-80"
-            class:holo={image.name !== "Base Art"}
+            class:holo={!image.name.startsWith("Base Art")}
             class:block={showAltArts || i > 0}
 			class:hidden={!showAltArts && i > 0}
             style="aspect-ratio: 416 / 580"
