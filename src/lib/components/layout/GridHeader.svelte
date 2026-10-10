@@ -37,18 +37,22 @@
 		{/if}
 		<p>&#x1F30E; Global: {data.global_release}</p>
 	</div>
-	<div class="my-2 flex flex-wrap gap-x-2 gap-y-4">
-		{#each ['L', 'C', 'UC', 'R', 'SR', 'SEC'] as r}
-			<p class="whitespace-nowrap" class:opacity-50={count[r] === data.rarities[r]}>
-				<span class="tag inline md:hidden">
-					{r} - {count[r]} / {data.rarities[r]}
-				</span>
-				<span class="tag hidden md:inline">
-					{rarityMap[r]}s: {count[r]} / {data.rarities[r]}
-				</span>
-			</p>
-		{/each}
-	</div>
+    {#if data.raritiesNotice}
+        <p class="text-white/70">{data.raritiesNotice}</p>
+    {:else}
+        <div class="my-2 flex flex-wrap gap-x-2 gap-y-4">
+            {#each ['L', 'C', 'UC', 'R', 'SR', 'SEC'] as r}
+                <p class="whitespace-nowrap" class:opacity-50={count[r] === data.rarities[r]}>
+                    <span class="tag inline md:hidden">
+                        {r} - {count[r]} / {data.rarities[r]}
+                    </span>
+                    <span class="tag hidden md:inline">
+                        {rarityMap[r]}s: {count[r]} / {data.rarities[r]}
+                    </span>
+                </p>
+            {/each}
+        </div>
+    {/if}
 	<div class="flex flex-wrap gap-x-4 gap-y-1">
 		<div class="flex flex-wrap gap-x-4">
 			<Toggle bind:toggled={hideUnrevealedCards} hideLabel />

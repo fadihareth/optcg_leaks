@@ -2,6 +2,7 @@ export type CardSetJSON = {
     id: string;
     name: string;
     description: string;
+    raritiesNotice?: string;
     japan_release: string;
     global_release: string;
     rarities: Record<string, number>;
@@ -11,6 +12,7 @@ export class CardSet {
     id: string;
     name: string;
     description: string;
+    raritiesNotice?: string;
     japan_release: string;
     global_release: string;
     rarities: Record<string, number>;
@@ -19,6 +21,7 @@ export class CardSet {
         this.id = data.id;
         this.name = data.name;
         this.description = data.description;
+        this.raritiesNotice = data.raritiesNotice;
         this.japan_release = data.japan_release;
         this.global_release = data.global_release;
         this.rarities = data.rarities;
