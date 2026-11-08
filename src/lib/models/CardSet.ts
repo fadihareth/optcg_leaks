@@ -1,6 +1,7 @@
 export type CardSetJSON = {
     id: string;
     name: string;
+    descriptionHeader: string;
     description: string;
     raritiesNotice?: string;
     japan_release: string;
@@ -11,6 +12,7 @@ export type CardSetJSON = {
 export class CardSet {
     id: string;
     name: string;
+    descriptionHeader: string;
     description: string;
     raritiesNotice?: string;
     japan_release: string;
@@ -20,6 +22,7 @@ export class CardSet {
     constructor(data: CardSetJSON) {
         this.id = data.id;
         this.name = data.name;
+        this.descriptionHeader = data.descriptionHeader;
         this.description = data.description;
         this.raritiesNotice = data.raritiesNotice;
         this.japan_release = data.japan_release;
