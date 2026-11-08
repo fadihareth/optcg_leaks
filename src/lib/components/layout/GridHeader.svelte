@@ -49,11 +49,10 @@
     <div class="flex">
         <button
             onclick={onOpen}
-            class="hover:cursor-pointer hover:brightness-80 flex gap-1"
+            class="hover:cursor-pointer hover:brightness-80 flex gap-1 text-left"
         >
             <span>&#8505;&#65039;</span>
-            <p class="underline text-white/70">
- {data.descriptionHeader}</p>
+            <p class="underline text-white/70">{data.descriptionHeader}</p>
         </button>
     </div>
 	<div class="flex flex-wrap gap-x-4 text-white/70">
